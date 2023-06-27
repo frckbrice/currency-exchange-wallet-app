@@ -179,7 +179,7 @@ li:hover {
   width: fit-content;
 } */
 .span-balance {
-  width: 6rem;
+  width: 8rem;
   margin-right: 5rem;
   height: 3rem;
   border-radius: 8px;
@@ -192,9 +192,8 @@ li:hover {
 }
 
 .SelectTargetcurrency {
-  width: 5rem;
+  width: 8rem;
   height: 3rem;
-
 }
 
 input[type="number"] {

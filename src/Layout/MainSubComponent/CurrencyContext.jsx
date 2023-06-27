@@ -65,7 +65,6 @@ const CurrencyProvider = (props) => {
         currencyData
       );
       setCurrencies([...currencies, currencyData]);
-      // setCurrencies((prev) => [...prev, currencyData]);
       setlocalStorCurrencies(currencies);
       console.log(
         "%c in add depositCurrency , currency is : ",
@@ -76,16 +75,17 @@ const CurrencyProvider = (props) => {
     [currencies, setlocalStorCurrencies]
   );
 
-  const getIndividualAmount = useMemo(
+  const getIndividualAmount = useCallback(
     (targetCurrency) => {
       console.log(
         "%c in add getIndividualAmount , currency is : ",
-        "color:red"
+        "color:green"
       );
-      return currencies.find((currency) => currency.code === targetCurrency)
-        ?.totalAmountInWalletConvertedTotarget;
+      return localStorCurrencies.find(
+        (currency) => currency.code === targetCurrency
+      )?.totalAmountInWallet;
     },
-    [currencies]
+    [localStorCurrencies]
   );
 
   const addCashToCurrency = useCallback(

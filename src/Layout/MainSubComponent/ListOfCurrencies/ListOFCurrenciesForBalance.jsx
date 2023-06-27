@@ -19,14 +19,20 @@ const ListOfCurrenciesForBalance = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name == "target_currency1" && value) {
+      console.log(value);
+       console.log(getIndividualAmount(value));
       setTargetcurrency1(value);
       setTargetcurrencyInput1(getIndividualAmount(value));
     }
     if (name == "target_currency2" && value) {
+       console.log(value);
       setTargetcurrency2(value);
+      console.log(getIndividualAmount(value));
       setTargetcurrencyInput2(getIndividualAmount(value));
     }
     if (name == "target_currency3" && value) {
+       console.log(value);
+        console.log(getIndividualAmount(value));
       setTargetcurrency3(value);
       setTargetcurrencyInput3(getIndividualAmount(value));
     }
@@ -60,7 +66,6 @@ const ListOfCurrenciesForBalance = (props) => {
           >
             {targetcurrencyInput1}
           </span>
-          {/* <strong></strong> */}
         </div>
         <div className={classes["div-input1"]}>
           <select
