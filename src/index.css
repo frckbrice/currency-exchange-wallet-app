@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** since tailwind is not responding,let's welcome to native CSS3*/
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body.modal-open {
+  /* filter: blur(2px); */
+}
