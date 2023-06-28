@@ -14,28 +14,39 @@ module.exports = {
  */
 
 const ListOfCurrenciesForDeposit = (props) => {
-  const [targetCurrency1, setTargetcurrency1] = useState("XAF");
+  const [targetcurrency1, setTargetcurrency1] = useState("USD");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
   const [targetcurrency2, setTargetcurrency2] = useState("EUR");
   const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
   const [targetcurrency3, setTargetcurrency3] = useState("CHF");
   const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
-  const { depositCurrency } = useContext(CurrencyContext);
+  //* call of context
+  const { depositCurrencies } = useContext(CurrencyContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-     if(targetCurrency1 && targetcurrencyInput1){
-      depositCurrency(targetCurrency1,targetcurrencyInput1);
-     }
-     if (targetcurrency2 && targetcurrencyInput2) {
-       depositCurrency(targetcurrency2, targetcurrencyInput2);
-     }
-     if (targetcurrency3 && targetcurrencyInput3) {
-       depositCurrency(targetcurrency3, targetcurrencyInput3);
-     }
-  };
 
+    const newFormData = [
+      {
+        code: targetcurrency1,
+        totalAmountInWallet: parseFloat(targetcurrencyInput1),
+        totalAmountInWalletConvertedTotarget: 0,
+      },
+      {
+        code: targetcurrency2,
+        totalAmountInWallet: parseFloat(targetcurrencyInput2),
+        totalAmountInWalletConvertedTotarget: 0,
+      },
+      {
+        code: targetcurrency3,
+        totalAmountInWallet: parseFloat(targetcurrencyInput3),
+        totalAmountInWalletConvertedTotarget: 0,
+      },
+    ];
+    depositCurrencies(newFormData);
+  };
+  // localStorage.removeItem("currencies");
   return (
     <form className={classes.show} onSubmit={handleSubmit}>
       <div className={classes["title-adding-balance"]}>
@@ -59,7 +70,7 @@ const ListOfCurrenciesForDeposit = (props) => {
             name="target_currency1"
             className={classes.SelectTargetcurrency}
             id="select-currency"
-            value={targetCurrency1}
+            value={targetcurrency1}
             onChange={(e) => setTargetcurrency1(e.target.value)}
           >
             {Object.entries(props.listOfCurrency).map((currency) => (
@@ -134,7 +145,6 @@ const ListOfCurrenciesForDeposit = (props) => {
 ListOfCurrenciesForDeposit.displayName = "ListOfCurrency";
 
 ListOfCurrenciesForDeposit.propTypes = {
-  handleChange: PropTypes.func.isRequired,
   listOfCurrency: PropTypes.object,
 };
 

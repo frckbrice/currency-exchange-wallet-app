@@ -4,31 +4,52 @@ import classes from "../../Main.module.css";
 import { CurrencyContext } from "../CurrencyContext";
 
 const ListOfCurrenciesForAdding = (props) => {
-  const [targetCurrency1, setTargetcurrency1] = useState("XAF");
+  const [targetcurrency1, setTargetcurrency1] = useState("USD");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
   const [targetcurrency2, setTargetcurrency2] = useState("EUR");
   const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
   const [targetcurrency3, setTargetcurrency3] = useState("CHF");
   const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
-  const { addCashToCurrency } = useContext(CurrencyContext);
+  const { addCashToCurrencies } = useContext(CurrencyContext);
 
-  const handleSubmit = (e) => {
-    e.preventdefault();
-     if (targetCurrency1 && targetcurrencyInput1) {
-       addCashToCurrency(targetCurrency1, targetcurrencyInput1);
-     }
-     if (targetcurrency2 && targetcurrencyInput2) {
-       addCashToCurrency(targetCurrency1, targetcurrencyInput1);
-     }
-     if (targetcurrency3 && targetcurrencyInput3) {
-       addCashToCurrency(targetCurrency1, targetcurrencyInput1);
-     }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newFormData = [
+      {
+        code: targetcurrency1,
+        totalAmountInWallet: parseFloat(targetcurrencyInput1),
+        totalAmountInWalletConvertedTotarget: 0,
+      },
+      {
+        code: targetcurrency2,
+        totalAmountInWallet: parseFloat(targetcurrencyInput2),
+        totalAmountInWalletConvertedTotarget: 0,
+      },
+      {
+        code: targetcurrency3,
+        totalAmountInWallet: parseFloat(targetcurrencyInput3),
+        totalAmountInWalletConvertedTotarget: 0,
+      },
+    ];
+
+    addCashToCurrencies(newFormData);
+
+    // if (targetcurrency1 && targetcurrencyInput1) {
+    //   addCashToCurrency(targetcurrency1, targetcurrencyInput1);
+    // }
+    // if (targetcurrency2 && targetcurrencyInput2) {
+    //   addCashToCurrency(targetcurrency2, targetcurrencyInput2);
+    // }
+    // if (targetcurrency3 && targetcurrencyInput3) {
+    //   addCashToCurrency(targetcurrency3, targetcurrencyInput3);
+    // }
   };
 
   return (
     <form className={classes.show} onSubmit={handleSubmit}>
-      <div className={classes['title-adding-balance']}>
+      <div className={classes["title-adding-balance"]}>
         <h1>Add Cash In The Balance</h1>
       </div>
       <div className={classes["p-input"]}>
@@ -37,7 +58,7 @@ const ListOfCurrenciesForAdding = (props) => {
             name="target_currency1"
             className={classes.SelectTargetcurrency}
             id="select-currency"
-            value={targetCurrency1}
+            value={targetcurrency1}
             onChange={(e) => setTargetcurrency1(e.target.value)}
           >
             {Object.entries(props.listOfCurrency).map((currency) => (
