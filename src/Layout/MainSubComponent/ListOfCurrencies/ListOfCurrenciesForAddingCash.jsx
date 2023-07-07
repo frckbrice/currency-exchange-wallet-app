@@ -11,7 +11,8 @@ const ListOfCurrenciesForAdding = (props) => {
   const [targetcurrency3, setTargetcurrency3] = useState("CHF");
   const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
-  const { addCashToCurrencies } = useContext(CurrencyContext);
+  const { addCashToCurrencies, localStorCurrencies } =
+    useContext(CurrencyContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,22 +36,20 @@ const ListOfCurrenciesForAdding = (props) => {
     ];
 
     addCashToCurrencies(newFormData);
-
-    // if (targetcurrency1 && targetcurrencyInput1) {
-    //   addCashToCurrency(targetcurrency1, targetcurrencyInput1);
-    // }
-    // if (targetcurrency2 && targetcurrencyInput2) {
-    //   addCashToCurrency(targetcurrency2, targetcurrencyInput2);
-    // }
-    // if (targetcurrency3 && targetcurrencyInput3) {
-    //   addCashToCurrency(targetcurrency3, targetcurrencyInput3);
-    // }
   };
 
   return (
     <form className={classes.show} onSubmit={handleSubmit}>
       <div className={classes["title-adding-balance"]}>
-        <h1>Add Cash In The Balance</h1>
+        <h1
+          style={{
+          
+            fontStyle: "italic",
+            color: "chartreuse",
+          }}
+        >
+          Add Cash to existing In The Balance
+        </h1>
       </div>
       <div className={classes["p-input"]}>
         <div className={classes["div-input1"]}>
@@ -61,9 +60,9 @@ const ListOfCurrenciesForAdding = (props) => {
             value={targetcurrency1}
             onChange={(e) => setTargetcurrency1(e.target.value)}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
@@ -83,9 +82,9 @@ const ListOfCurrenciesForAdding = (props) => {
             value={targetcurrency2}
             onChange={(e) => setTargetcurrency2(e.target.value)}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
@@ -105,9 +104,9 @@ const ListOfCurrenciesForAdding = (props) => {
             value={targetcurrency3}
             onChange={(e) => setTargetcurrency3(e.target.value)}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>

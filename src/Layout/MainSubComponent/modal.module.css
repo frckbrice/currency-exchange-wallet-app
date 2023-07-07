@@ -1,26 +1,26 @@
-
-
 .modal {
   position: fixed;
   top: 15vh;
   left: 5%;
   width: 80%;
-  font-family: Philosopher, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  background-color: rgba(255, 255, 255, 0.963);
+  font-family: Philosopher, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  background-color: rgb(239, 243, 243);
   padding: 1rem;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
+  font-weight: 800;
 }
 
 .overlay {
-    top: 0;
+  top: 12vh;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: 100vh;
+  height: 78vh;
   background: rgb(0, 0, 0);
   opacity: 0.9;
   position: fixed;
@@ -42,9 +42,11 @@
 
 .SelectModalcurrency {
   width: 44%;
-   height: 55px;
-   margin-left: 18px;
-   border-radius: 8px;
+  height: 55px;
+  margin-left: 10px;
+  border-radius: 8px;
+  background-color: #9d9898;
+  color: aliceblue;
 }
 
 .Selectcurrency:focus {
@@ -52,46 +54,33 @@
 }
 
 .input-modal {
-   padding: 1rem;
+  padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-   border-radius: 8px;
-   width: 40%;
+  border-radius: 8px;
+  width: 40%;
   /* height: 100%; */
- margin: 0 0 0 15px;
+  margin: 0 0 0 15px;
   background-color: rgba(50, 191, 216, 0.094);
 }
 
 .div-modal-label {
-   margin: 15px 15px 0 20px;
-   display: flex;
-   width: fit-content;
-   flex-direction: column;
-   /* justify-content: space-between; */
-   gap: 15px;
+  margin: 15px 15px 0 0;
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 15px;
 }
 
-.div-modal-select {
+/* .div-modal-select {
   margin-left: 30px;
-}
+} */
 
 .div-modal-contennt {
   display: flex;
   align-items: center;
-}
-
-.result-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-
-.print-result {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  padding: 10px 20px;
-  color: green;
-  border-radius: 8px;
-  font-family: Philosopher, sans-serif;
+  font-size: 19px;
+ position: relative;
 }
 
 .div-modal-btn {
@@ -102,10 +91,38 @@
 }
 
 .btn-validate-modal {
-  padding: 8px 16px ;
+  padding: 8px 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   color: rgb(3, 197, 3);
-   border-radius: 15px;
+  border-radius: 15px;
+  font-family: Philosopher, "Helvetica Neue";
+  font-size: 20px;
+}
+
+.btn-cancel-modal {
+  padding: 8px 16px;
+  color: brown;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  font-size: 20px;
+  font-family: Philosopher, "sans serif";
+}
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.print-result {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  padding: 10px 20px;
+  color: green;
+  border-radius: 8px;
+
+  font-family: Philosopher, sans-serif;
 }
 
 .result {
@@ -113,6 +130,9 @@
   flex-direction: column;
   gap: 20px;
   font-size: 20px;
+ 
+  font-family: Philosopher, "sans serif";
+
 }
 
 .bump {
@@ -135,14 +155,6 @@
   100% {
     transform: scale(1);
   }
-}
-
-
-.btn-cancel-modal {
-  padding: 8px 16px ;
-  color: brown;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
 }
 
 @media (min-width: 768px) {

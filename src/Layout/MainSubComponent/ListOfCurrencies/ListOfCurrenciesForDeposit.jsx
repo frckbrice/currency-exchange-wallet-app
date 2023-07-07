@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import classes from "../../Main.module.css";
 import { CurrencyContext } from "../CurrencyContext";
@@ -20,13 +20,13 @@ const ListOfCurrenciesForDeposit = (props) => {
   const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
   const [targetcurrency3, setTargetcurrency3] = useState("CHF");
   const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
+  const [formData, setFormData] = useState([]);
 
   //* call of context
   const { depositCurrencies } = useContext(CurrencyContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const newFormData = [
       {
         code: targetcurrency1,
@@ -44,8 +44,12 @@ const ListOfCurrenciesForDeposit = (props) => {
         totalAmountInWalletConvertedTotarget: 0,
       },
     ];
-    depositCurrencies(newFormData);
+    setFormData(newFormData);
+   
+      depositCurrencies(formData);
+
   };
+
   // localStorage.removeItem("currencies");
   return (
     <form className={classes.show} onSubmit={handleSubmit}>

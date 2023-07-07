@@ -75,7 +75,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 3%;
+  margin-top: 7%;
 }
 
 .ul {
@@ -116,12 +116,12 @@ li:hover {
 }
 
 .show {
-  width: auto;
+  width: 70%;
   min-width: 60%;
   border: 1px solid #dddddd6b;
   border-radius: 15px;
   padding: 2rem 1rem;
-  margin:2rem 0 0;
+  margin: 5rem 0 0;
   font-family: Philosopher, sans-serif;
   height: auto;
   position: relative;
@@ -158,7 +158,7 @@ li:hover {
 }
 
 .p-input {
-   display: flex;
+  display: flex;
   align-items: center;
   margin: 0 0 0 3%;
   gap: 15px;
@@ -166,21 +166,27 @@ li:hover {
 }
 
 .div-input {
-  margin: 0 0 20px 7.3%;
+  margin: 0 0 20px 2.5%;
 }
 
 .div-input1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-basis: 30%;
 }
 
-/* .div-currency {
-  width: fit-content;
-} */
+.title-defaultvalue {
+  margin: 0 0 10px 2.5%;
+} 
+
+.title-value{
+  margin: 0 0 10px 5%;
+}
+
 .span-balance {
   width: 8rem;
-  margin-right: 5rem;
+  /* margin-right: 5rem; */
   height: 3rem;
   border-radius: 8px;
   color: black;
@@ -204,6 +210,10 @@ input[type="number"] {
   padding-right: 0;
   font-size: 18px;
   border-radius: 8px;
+}
+
+.default-convert-amount {
+  margin-top: 6%;
 }
 
 input[type="number"] :focus {

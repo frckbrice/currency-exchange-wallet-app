@@ -12,7 +12,8 @@ const ListOfCurrenciesForBalance = (props) => {
   const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
   // to call up the context
-  const { getIndividualAmount } = useContext(CurrencyContext);
+  const { getIndividualAmount, localStorCurrencies } =
+    useContext(CurrencyContext);
 
   // if selected value the value of balance is update from the context
 
@@ -35,7 +36,14 @@ const ListOfCurrenciesForBalance = (props) => {
   return (
     <div className={classes.show}>
       <div className={classes["title-adding-balance"]}>
-        <h1> Balance of the Wallet</h1>
+        <h1
+          style={{
+            fontStyle: "italic",
+            color: "chartreuse",
+          }}
+        >
+          Balance of the Wallet
+        </h1>
       </div>
       <div className={classes["p-input"]}>
         <div className={classes["div-input1"]}>
@@ -46,9 +54,9 @@ const ListOfCurrenciesForBalance = (props) => {
             value={targetCurrency1}
             onChange={handleChange}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
@@ -69,9 +77,9 @@ const ListOfCurrenciesForBalance = (props) => {
             value={targetcurrency2}
             onChange={handleChange}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
@@ -92,9 +100,9 @@ const ListOfCurrenciesForBalance = (props) => {
             value={targetcurrency3}
             onChange={handleChange}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
