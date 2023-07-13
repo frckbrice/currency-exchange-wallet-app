@@ -20,7 +20,6 @@ const ListOfCurrenciesForDeposit = (props) => {
   const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
   const [targetcurrency3, setTargetcurrency3] = useState("CHF");
   const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
-  const [formData, setFormData] = useState([]);
 
   //* call of context
   const { depositCurrencies } = useContext(CurrencyContext);
@@ -44,9 +43,8 @@ const ListOfCurrenciesForDeposit = (props) => {
         totalAmountInWalletConvertedTotarget: 0,
       },
     ];
-    setFormData(newFormData);
-   
-      depositCurrencies(formData);
+
+    depositCurrencies(newFormData);
 
   };
 
@@ -56,7 +54,7 @@ const ListOfCurrenciesForDeposit = (props) => {
       <div className={classes["title-adding-balance"]}>
         <h1>
           {" "}
-          Deposit in the Wallet{" "}
+          Deposit of Cash in the Wallet{" "}
           <span
             style={{
               fontSize: "18px",
@@ -88,7 +86,7 @@ const ListOfCurrenciesForDeposit = (props) => {
             id="usd"
             name="input_target_currency1"
             onChange={(e) => setTargetcurrencyInput1(e.target.value)}
-            placeholder="USD"
+            placeholder="Enter Amount"
           />
         </div>
         <div className={classes["div-input1"]}>
@@ -110,7 +108,7 @@ const ListOfCurrenciesForDeposit = (props) => {
             id="eur"
             name="input_target_currency2"
             onChange={(e) => setTargetcurrencyInput2(e.target.value)}
-            placeholder="EUR"
+            placeholder="Enter  Amount"
           />
         </div>
         <div className={classes["div-input1"]}>
@@ -132,7 +130,7 @@ const ListOfCurrenciesForDeposit = (props) => {
             id="chf"
             name="input_target_currency3"
             onChange={(e) => setTargetcurrencyInput3(e.target.value)}
-            placeholder="CHF"
+            placeholder="Enter Amount"
           />
         </div>
       </div>

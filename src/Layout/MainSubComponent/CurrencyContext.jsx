@@ -119,6 +119,16 @@ const CurrencyProvider = (props) => {
   const depositCurrencies = useCallback(
     (arrayOfCurrencies) => {
       let newCurrencies = [];
+      console.log(
+        "%c at the starting in add depositCurrency , currencies is : ",
+        "color:purple",
+        currencies
+      );
+      console.log(
+        "%c at the starting in add depositCurrency , arrayOfCurrencies is : ",
+        "color:pink",
+        arrayOfCurrencies
+      );
 
       newCurrencies =
         localStorCurrencies?.length !== 0
@@ -133,21 +143,27 @@ const CurrencyProvider = (props) => {
               },
               [...localStorCurrencies]
             )
-          : currencies.concat(arrayOfCurrencies);
+          : (newCurrencies = currencies.concat(arrayOfCurrencies));
 
-      newCurrencies.length > 1 ? setCurrencies(newCurrencies) : "";
-      toast.success("Currencies and amount saved successfully in the wallet!");
-      newCurrencies = [];
-      // store to localStorage
-      {
-        currencies.length > 1 ? setlocalStorCurrencies(currencies) : "";
+          console.log('befor update: currencies' ,currencies);
+          console.log("befor update: newcurrencies", newCurrencies);
+
+      if (newCurrencies.length > 1) {
+        setCurrencies(newCurrencies);
+         console.log("after update: currencies", currencies);
+        toast.success(
+          "Currencies and amount saved successfully in the wallet!"
+        );
+        setlocalStorCurrencies(currencies);
+        console.log(
+          "%c in add depositCurrency , currencies is : ",
+          "color:green",
+          currencies
+        );
       }
 
-      console.log(
-        "%c in add depositCurrency , currencies is : ",
-        "color:green",
-        newCurrencies
-      );
+      newCurrencies = [];
+      // store to localStorage
     },
     [currencies, setlocalStorCurrencies, localStorCurrencies]
   );

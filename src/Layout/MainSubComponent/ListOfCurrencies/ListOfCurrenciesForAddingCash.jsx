@@ -48,7 +48,7 @@ const ListOfCurrenciesForAdding = (props) => {
             color: "chartreuse",
           }}
         >
-          Add Cash to existing In The Balance
+          Add Cash to the existing In The Walleet
         </h1>
       </div>
       <div className={classes["p-input"]}>
