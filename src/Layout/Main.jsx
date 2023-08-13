@@ -104,10 +104,11 @@ const Main = () => {
           />
         )}
       </div>
-      <video className={classes.video} autoPlay loop>
+      <video className={classes.video} autoPlay loop muted playsInline>
         <source
-          src="https://cdn.dribbble.com/uploads/39421/original/963b4f8739cbdf86ca3f3a23245efd18.mp4?1657824985"
-          type="video/mp4"
+          // src="https://cdn.dribbble.com/uploads/39421/original/963b4f8739cbdf86ca3f3a23245efd18.mp4?1657824985"
+          // type="video/mp4"
+          src="https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906" type="video/mp4"
         />
       </video>
     </main>

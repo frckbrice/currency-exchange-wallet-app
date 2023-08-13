@@ -1,10 +1,43 @@
 .header {
   width: 100%;
-  height: 30vh;
-  background-color: white;
-  font-family: 'Jim Nightshade', sans-serif;
-  font-size: 60px;
+  height: 20vh;
+  /* background: linear-gradient(rgba(0 0 0 /30%), transparent ); */
+font-family: inherit;
+  font-size: 5rem;
   margin: 0 auto;
-  color: indigo;
+  color: black;
   font-weight: 100;
+  display: flex;
+  align-items: center;
+  padding: 2rem 2rem;
+  justify-content: space-between;
+}
+
+.div-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.div-title h1  {
+  font-family: "Dancing Script", serif;
+  font-weight: 900;
+}
+
+.div-title h5  {
+  font-family: "Gloria Hallelujah", serif;
+  font-weight:lighter;
+  font-size: 18px;
+}
+
+.span-underlined {
+  text-decoration: underline;
+}
+
+.div-description {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Dancing Script", tahoma;
 }

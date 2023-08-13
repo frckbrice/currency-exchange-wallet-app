@@ -135,3 +135,5 @@ ListOfCurrenciesForBalance.prototype = {
 }
 
 export default ListOfCurrenciesForBalance;
+
+//

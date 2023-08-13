@@ -7,7 +7,7 @@
 
 .main {
   max-width: 100vw;
-  height: 60vh;
+  height: 70vh;
   position: relative;
   background: white;
   overflow: hidden;
@@ -15,12 +15,12 @@
 }
 
 .overlay {
-  top: 20vh;
+  top: 15vh;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: 60vh;
+  height: 70vh;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0.9;
   position: fixed;
@@ -31,9 +31,10 @@
   width: 100vw;
   border: none;
   transition: all 0.8s ease-in-out;
-  object-fit: contain;
+  object-fit: fill;
   overflow-clip-margin: content-box;
   overflow: clip;
+  top: 15vh;
 }
 
 .logo {
@@ -96,8 +97,6 @@ li {
   padding: 10px 20px;
   font-weight: bold;
   cursor: pointer;
-  /* box-shadow: rgba(0, 0, 0, 0.25) -1px -10px 5px,
-    rgba(124, 110, 110, 0.244) 0px 10px 10px; */
 }
 
 li:nth-child(1) {
