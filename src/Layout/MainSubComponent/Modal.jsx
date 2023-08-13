@@ -15,7 +15,7 @@ const portal = document.getElementById("portal");
 const Modal = (props) => {
   const [input_value, setInput_value] = useState(0);
   const [resultIsHighlighted, setResultIsHighlighted] = useState(false);
-  const {
+  let {
     localStorCurrencies,
     substractFromCurrencyToTarget,
     setBaseCurrency,
@@ -23,8 +23,8 @@ const Modal = (props) => {
     partAmountConverted,
   } = useContext(CurrencyContext);
   const [result, setResult] = useState(0);
-  const [source_currency, setSource_currency] = useState("USD");
-  const [target_currency, setTarget_currency] = useState("EUR");
+  const [source_currency, setSource_currency] = useState("source");
+  const [target_currency, setTarget_currency] = useState("target");
 
   const btnClasses = `${classes["print-result"]} ${
     resultIsHighlighted ? classes.bump : ""
@@ -38,7 +38,7 @@ const Modal = (props) => {
 
     const timer = setTimeout(() => {
       setResultIsHighlighted(false);
-    }, 300);
+    }, 400);
 
     return () => {
       clearTimeout(timer);
@@ -72,15 +72,17 @@ const Modal = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     substractFromCurrencyToTarget(
-      input_value,
-      source_currency,
-      target_currency
+      event.target.elements.input_value.value,
+      event.target.elements.base_currency.value,
+      event.target.elements.away_currency.value
     );
+    setTarget_currency(event.target.elements.away_currency.value);
     setResult(partAmountConverted);
   };
 
   const handleSaveResult = () => {
-    addCashToCurrency(target_currency, result);
+    addCashToCurrency(target_currency, partAmountConverted);
+    document.getElementById('partAmountConverted').textContent = 0;
   };
 
   return (
@@ -122,7 +124,7 @@ const Modal = (props) => {
                     name="base_currency"
                     className={classes.SelectModalcurrency}
                     id="select-currency1"
-                    value={source_currency}
+                    defaultValue={source_currency}
                     onChange={handleChange}
                   >
                     {localStorCurrencies.map((currency) => (
@@ -160,7 +162,9 @@ const Modal = (props) => {
                 <div className={classes.result}>
                   <div className={classes["result-container"]}>
                     <h3>Result :</h3>
-                    <span className={btnClasses}>{result}</span>
+                    <span className={btnClasses} id="partAmountConverted">
+                      {partAmountConverted.toFixed(2)}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -182,7 +186,7 @@ const Modal = (props) => {
                 onClick={props.onClose}
                 className={classes["btn-cancel-modal"]}
               >
-                Cancel
+                Done
               </button>
             </div>
           </form>

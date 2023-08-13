@@ -28,6 +28,12 @@ export const useCurrency = (frm, to) => {
               progressEvent.loaded
             );
           },
+          header: {
+            "Access-Control-Allow-origin": "*",
+            "Access-control-Allow-Method": "POST,PUT,DELETE,GET,OPTIONS",
+            "Access-Control-Allow-Headers":
+              "content-type, X-Auth-Token,Origin, Authorization",
+          },
         });
         // console.log(rates);
         setListOfCurrencies(data.data);

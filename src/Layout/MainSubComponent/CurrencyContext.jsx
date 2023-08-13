@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo, useCallback } from "react";
+import { createContext, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-hot-toast";
 import { useCurrency } from "./Api";
@@ -32,47 +32,96 @@ const CurrencyProvider = (props) => {
   );
 
   const [base_currency, setBase_currency] = useState(base_cur);
-  const [partAmountConverted, setPartAmountConverted] = useState(0);
+  let [partAmountConverted, setPartAmountConverted] = useState(0);
   let { listOfCurrencies } = useCurrency(`${from}`, to);
 
   // console.log(listOfCurrencies.CHF);
+  //* add Cash to currency
+  const addCashToCurrency = useCallback(
+    (targetcurrency, amount) => {
+
+      console.log(targetcurrency, amount)
+      let newCurrencies = localStorCurrencies?.map((currency) =>
+        currency.code === targetcurrency
+          ? {
+              ...currency,
+              totalAmountInWallet: +currency.totalAmountInWallet + +amount,
+            }
+          : currency
+      );
+
+      if (newCurrencies.length != 0) {
+        setlocalStorCurrencies(newCurrencies);
+        setCurrencies(newCurrencies);
+        console.log(newCurrencies);
+        toast.success("amount saved successfully in the wallet!");
+        newCurrencies = [];
+      }
+      return;
+    },
+    [setlocalStorCurrencies, localStorCurrencies]
+  );
 
   //* deposit currency
   const depositCurrency = useCallback(
     (targetCurrency, amount) => {
-      let currencyData = {
-        code: targetCurrency,
-        totalAmountInWallet: amount,
-        totalAmountInWalletConvertedTotarget: 0,
-      };
-      console.log(
-        "%c in add depositCurrency , currency is : ",
-        "color:red",
-        currencyData
-      );
-      setCurrencies([...currencies, currencyData]);
-
-      {
-        currencies.length != 0 ? setlocalStorCurrencies(currencies) : "";
+      let newcurrencies = [];
+      let currencyData = {};
+      if (targetCurrency && amount) {
+        currencyData = {
+          code: targetCurrency,
+          totalAmountInWallet: amount,
+          totalAmountInWalletConvertedTotarget: 0,
+        };
+        console.log(
+          "%c in add depositCurrency , currency is : ",
+          "color:red",
+          currencyData
+        );
+        if (localStorCurrencies.length === 0) {
+          console.log("local storage empty ");
+          console.log(typeof currencies);
+          setCurrencies([...currencies, currencyData]);
+          setlocalStorCurrencies([...currencies, currencyData]);
+        } else {
+          console.log("local storage not empty ");
+          const found = localStorCurrencies.some(
+            (currency) => currency.code === currencyData.code
+          );
+          if (!found) {
+            // newcurrencies = [...currencies, currencyData];
+            console.log("currency not found", newcurrencies);
+            setCurrencies([...currencies, currencyData]);
+            setlocalStorCurrencies([...currencies, currencyData]);
+          } else {
+            addCashToCurrency(targetCurrency, amount);
+            console.log("currency found");
+          }
+        }
+      } else {
+        alert("NO Currency OR Amount Selected!");
       }
-      currencyData = {};
+
       console.log(
         "%c in add depositCurrency , currencies is : ",
         "color:green",
-        currencies
+        newcurrencies
       );
     },
-    [currencies, setlocalStorCurrencies]
+    [currencies, localStorCurrencies, setlocalStorCurrencies, addCashToCurrency]
   );
 
-  //* get individual amount of currencies
+  //* get individual amount from currency
   const getIndividualAmount = useCallback(
     (targetCurrency) => {
       console.log("%c in add getIndividualAmount : ", "color:tomato");
-      return (
-        localStorCurrencies.find((currency) => currency.code === targetCurrency)
-          ?.totalAmountInWallet || 0
-      );
+      console.log(localStorCurrencies);
+      const targetValue =
+        localStorCurrencies?.find(
+          (currency) => currency.code === targetCurrency
+        )?.totalAmountInWallet || 0;
+      console.log(targetCurrency, targetValue);
+      return targetValue;
     },
     [localStorCurrencies]
   );
@@ -84,35 +133,18 @@ const CurrencyProvider = (props) => {
         "%c in getIndividualAmountConvertedToBase : ",
         "color:tomato"
       );
-      const value = localStorCurrencies.find(
-        (currency) => currency.code === targetCurrency
-      )?.totalAmountInWalletConvertedTotarget;
-      console.log(value);
-      return value || 0;
+      let value = 0;
+      if (localStorCurrencies.length > 0) {
+        value = localStorCurrencies.find(
+          (currency) => currency.code === targetCurrency
+        )?.totalAmountInWalletConvertedTotarget;
+      } else {
+        alert("No currency in the Wallet!");
+      }
+
+      return value;
     },
     [localStorCurrencies]
-  );
-
-  //* add Cash to currency
-  const addCashToCurrency = useCallback(
-    (targetcurrency, amount) => {
-      let newCurrencies = localStorCurrencies.map((currency) =>
-        currency.code === targetcurrency
-          ? {
-              ...currency,
-              totalAmountInWallet: currency.totalAmountInWallet + amount,
-            }
-          : currency
-      );
-
-      newCurrencies.length != 0 ? setCurrencies(newCurrencies) : "";
-      toast.success("amount saved successfully in the wallet!");
-      {
-        currencies.length != 0 ? setlocalStorCurrencies(currencies) : "";
-      }
-      newCurrencies = [];
-    },
-    [currencies, setlocalStorCurrencies, localStorCurrencies]
   );
 
   //* deposit currencies
@@ -145,12 +177,12 @@ const CurrencyProvider = (props) => {
             )
           : (newCurrencies = currencies.concat(arrayOfCurrencies));
 
-          console.log('befor update: currencies' ,currencies);
-          console.log("befor update: newcurrencies", newCurrencies);
+      console.log("befor update: currencies", currencies);
+      console.log("befor update: newcurrencies", newCurrencies);
 
       if (newCurrencies.length > 1) {
         setCurrencies(newCurrencies);
-         console.log("after update: currencies", currencies);
+        console.log("after update: currencies", currencies);
         toast.success(
           "Currencies and amount saved successfully in the wallet!"
         );
@@ -217,16 +249,12 @@ const CurrencyProvider = (props) => {
   //* set  base currency
   const setBaseCurrency = useCallback(
     (basecurrency) => {
+      // sset the base currency to fetch the truth rate from api
       setFrom(basecurrency);
       const base = {
         code: basecurrency,
         listOfCurrencies: listOfCurrencies,
       };
-      console.log(
-        "%c in setBaseCurrency",
-        "color:blue",
-        base.listOfCurrencies.CHF
-      );
       setBase_currency(base);
       toast.success("Base currency successfully set !");
     },
@@ -236,97 +264,86 @@ const CurrencyProvider = (props) => {
   //* convert all currencies to base currency
   const convertAllTo = useCallback(
     (baseCurrency) => {
-      setBaseCurrency(baseCurrency);
-
       let newCurrencies = [];
-
-      newCurrencies =
-        localStorCurrencies.length > 1
-          ? localStorCurrencies?.map((currency) => ({
-              ...currency,
-              totalAmountInWalletConvertedTotarget:
-                currency.totalAmountInWallet *
-                base_currency.listOfCurrencies[`${baseCurrency}`],
-            }))
-          : [];
+      // if the is basecurrency it has already settled in the function above
+      if (baseCurrency) {
+        newCurrencies =
+          localStorCurrencies.length > 0
+            ? localStorCurrencies?.map((currency) => ({
+                ...currency,
+                totalAmountInWalletConvertedTotarget:
+                  currency.totalAmountInWallet *
+                  listOfCurrencies[`${currency.code}`],
+              }))
+            : [];
+      }
 
       // update currencies
-      newCurrencies.length > 1
-        ? setCurrencies(newCurrencies)
-        : alert("no currency in the balance yet !");
-      // store to local storage
-      {
-        currencies.length > 1 ? setlocalStorCurrencies(currencies) : "";
+      if (newCurrencies.length > 0) {
+        setCurrencies(newCurrencies);
+        // store to local storage
+        setlocalStorCurrencies(newCurrencies);
+        toast.success(
+          "All Currencies successfully converted to base currency !"
+        );
+      } else {
+        alert("No currency in the Wallet!");
       }
-      toast.success("All Currencies successfully converted to base currency !");
-      console.log(
-        "%c in convert All to base currency , currencies is : ",
-        "color:green",
-        currencies,
-        "and newCurrencies is",
-        newCurrencies
-      );
-      newCurrencies = [];
     },
-    [
-      currencies,
-      setlocalStorCurrencies,
-      localStorCurrencies,
-      setBaseCurrency,
-      base_currency.listOfCurrencies,
-    ]
+    [setlocalStorCurrencies, localStorCurrencies, listOfCurrencies]
   );
 
   //* get total amount of currencies converted to base currency
   const getTotalAmountInTargetCurrency = useCallback(() => {
-    console.log(
-      "%c in add getTotalAmountInTargetCurrency , currency is : ",
-      "color:red"
-    );
-
-    const totalAmount = localStorCurrencies?.reduce(
-      (totalConvertedAmount, currency) => {
-        return (
-          totalConvertedAmount + currency.totalAmountInWalletConvertedTotarget
-        );
-      },
-      0
-    );
-    console.log("total amount", totalAmount);
-    {
-      totalAmount != 0 ? setTotalAmountConverted(totalAmount) : "";
+    let totalAmount = 0;
+    if (localStorCurrencies.length > 0) {
+      totalAmount = localStorCurrencies?.reduce(
+        (totalConvertedAmount, currency) =>
+          totalConvertedAmount + currency.totalAmountInWalletConvertedTotarget,
+        0
+      );
+      setTotalAmountConverted(totalAmount);
     }
-    return totalAmount;
+
+    return totalAmount || 0;
   }, [localStorCurrencies]);
 
   //* substract part of currency in balance
   const substractFromCurrencyToTarget = useCallback(
     (amount, sourceCurrencyCode, targetCurrencyCode) => {
-      const currArray = localStorCurrencies?.map((currency) =>
-        currency.code === sourceCurrencyCode
-          ? {
-              ...currency,
-              totalAmountInWallet: currency.totalAmountInWallet - amount,
-            }
-          : currency
-      );
-
-      const newAmount =
-        amount * base_currency?.listOfCurrencies[`${targetCurrencyCode}`];
-
-      setCurrencies(currArray);
-      setPartAmountConverted(newAmount);
-      currencies.length > 1 ? setlocalStorCurrencies(currencies) : "";
-      toast.success(
-        "the amount has been removed from the source currency balance!"
-      );
+      let currArray = [];
+      let newAmount = 0;
+      console.log('sourceCurr', sourceCurrencyCode)
+      console.log("targetcurr", targetCurrencyCode);
+      if (
+        localStorCurrencies.length > 0 &&
+        sourceCurrencyCode &&
+        targetCurrencyCode &&
+        amount
+        
+      ) {
+        console.log("in  substractFromCurrencyToTarget all ok ");
+        currArray = localStorCurrencies?.map((currency) =>
+          currency.code === sourceCurrencyCode
+            ? {
+                ...currency,
+                totalAmountInWallet: currency.totalAmountInWallet - amount,
+              }
+            : currency
+        );
+        setCurrencies(currArray);
+        // set base currency to fetch truth value from api
+        setFrom(sourceCurrencyCode);
+        console.log(listOfCurrencies[`${targetCurrencyCode}`]);
+        newAmount = amount * listOfCurrencies[`${targetCurrencyCode}`];
+        setPartAmountConverted(newAmount);
+        setlocalStorCurrencies(currArray);
+        toast.success("Operation successfull. Check your Wallet Account!");
+      } else {
+        alert("No currency in the Wallet! or No correct values entered");
+      }
     },
-    [
-      currencies,
-      base_currency.listOfCurrencies,
-      setlocalStorCurrencies,
-      localStorCurrencies,
-    ]
+    [listOfCurrencies, setlocalStorCurrencies, localStorCurrencies]
   );
 
   const values = {
@@ -358,6 +375,11 @@ CurrencyProvider.propTypes = {
   convertAllTo: PropTypes.func,
   convertPartFromTo: PropTypes.func,
   totalAmountConverted: PropTypes.number,
+  getIndividualAmount: PropTypes.func,
+  addCashToCurrency: PropTypes.func,
+  addCashToCurrencies: PropTypes.func,
+  setBaseCurrency: PropTypes.func,
+  partAmountConverted: PropTypes.string,
 };
 
 export default CurrencyProvider;

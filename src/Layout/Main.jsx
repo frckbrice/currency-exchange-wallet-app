@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useContext } from "react";
+import { useRef, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import reactLogo from "../assets/react.svg";
 import classes from "./Main.module.css";
@@ -9,7 +9,6 @@ import ListOfCurrenciesForDeposit from "./MainSubComponent/ListOfCurrencies/List
 import ListOfCurrenciesForValues from "./MainSubComponent/ListOfCurrencies/ListOfCurrenciesForValues";
 import Modal from "./MainSubComponent/Modal";
 import { useCurrency } from "./MainSubComponent/Api";
-import { CurrencyContext } from "./MainSubComponent/CurrencyContext";
 import ListOfCurrenciesForAdding from "./MainSubComponent/ListOfCurrencies/ListOfCurrenciesForAddingCash";
 
 const to = "";
@@ -18,7 +17,7 @@ const from = "";
 // const endpoint = "convert";
 // const access_key = "ff286a1bcb9d4b340c8b641ab013dc47";
 
-const Main = (props) => {
+const Main = () => {
   const configRef = useRef();
   const [showCurrencyTabDeposit, setShowCurrencyTabDeposit] = useState(false);
   const [showCurrencyTabBalance, setShowCurrencyTabBalance] = useState(false);
@@ -37,6 +36,7 @@ const Main = (props) => {
         setShowCurrencyTabBalance(false);
         setShowCurrencyTabValues(false);
         setShowCurrencyTabAdding(false);
+        document.querySelector(".deposit-currency").style.border= '1px solide red';
         break;
         
       case "balance-currency":

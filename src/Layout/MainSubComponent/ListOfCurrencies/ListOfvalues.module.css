@@ -45,9 +45,11 @@
   position: absolute;
   right: 100px;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #ff57ddaa);
 }
@@ -134,9 +136,8 @@ li:hover {
   font-family: Philosopher, sans-serif;
   border-radius: 8px;
   /* display: none; */
-  font-size: 18px;
-  padding: 0 15px;
-  background-color: white;
+  font-size: 20px;
+  padding: 10px 15px;
   color: black;
   outline-color: none;
   margin: 0 10% 0 10px;
@@ -166,7 +167,7 @@ li:hover {
 }
 
 .div-input {
-  margin: 0 0 20px 2.5%;
+  margin: 0 0 50px 2.5%;
 }
 
 .div-input1 {
@@ -185,21 +186,22 @@ li:hover {
 }
 
 .span-balance {
-  width: 8rem;
+  width: 15rem;
   /* margin-right: 5rem; */
-  height: 3rem;
+  height: 3.5rem;
   border-radius: 8px;
   color: black;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 18px;
+  padding: 8px 5px;
+  font-size: 1.25rem;
 }
 
 .SelectTargetcurrency {
-  width: 8rem;
-  height: 3rem;
+  width: 15rem;
+  height: 3.5rem;
 }
 
 input[type="number"] {
@@ -208,7 +210,7 @@ input[type="number"] {
   color: black;
   padding: 8px 7px;
   padding-right: 0;
-  font-size: 18px;
+  font-size: 20px;
   border-radius: 8px;
 }
 
@@ -261,17 +263,23 @@ input[type="submit"] {
 }
 
 .convert {
+  width: 100%             ;
+}
+
+.convert span {
   margin-left: 4.3%;
-  margin-top: 6%;
+  /* margin-top: 6%; */
   font-size: 1.25em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   color: lightblue;
   font-weight: bold;
   font-family: Philosopher, sans-serif;
   cursor: pointer;
-  width: fit-content;
+  /* width: fit-content; */
   padding: 6px 12px;
+  text-align: center;
   border-radius: 8px;
+  border: none;
 }
 
 .div-total-in-default-curr {
@@ -280,7 +288,16 @@ input[type="submit"] {
   margin-left: 15%;
   position: absolute;
   right: 5%;
-  bottom: 8%;
+  top: 18%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.total-amount-converted {
+  font-size: 20px;
+  color: chartreuse;
+  font-family: Satisfy, sans-serif;
+  font-style: italic;
 }
 
 @media screen and (max-width: 768px) {
@@ -295,6 +312,111 @@ input[type="submit"] {
   }
 
   .show {
-    width: 70%;
+    width: 95%;
   }
+
+  .convert {
+    margin: 10% 0 0 13vw;
+  }
+
+  .Selectcurrency {
+    width: 15rem;
+  }
+
+
+}
+
+@media screen and (max-width: 475px) {
+
+  .show {
+    padding: 2rem 0.5rem 0 0;
+    height: 500px;
+  }
+
+  .div-input1 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .Selectcurrency {
+    width: 90%;
+    margin-left: 20px;
+  }
+
+  .submit-btn {
+   width: 10rem;
+  }
+
+  .span-balance {
+    margin-right: 1rem;
+  }
+
+  .convert {
+    margin-right: 15px;
+  }
+
+  .div-total-in-default-curr {
+    top: 30%;
+    width: 80%;
+    margin-right: 20px;
+  }
+
+  .title-value {
+    margin-top: 100px;
+    margin-left: 50px;
+  }
+
+  .convert {
+    margin: 10% 0 0 30vw;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  .title-value {
+    margin-left: 30px;
+  }
+
+  .title-defaultvalue {
+    margin-left: 25px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+ .convert span {
+  position: absolute;
+  bottom: 20px;
+  right: 32%;
+ }
+
+ .div-input1 {
+  position: absolute;
+  bottom: 100px;
+ }
+
+  .title-value {
+   position: absolute;
+  bottom: 35%;
+  }
+
+  .div-total-in-default-curr {
+    top: 30%;
+    width: 90%;
+    margin-right: 0;
+  }
+
+  .Selectcurrency {
+    margin-left: 10px;
+  }
+
+  .span1forselecttitle {
+    display: none;
+  }
+
+  .span2forselecttitle::after {
+    content: "select currency, see value";
+    margin-right: 10px;
+  }
+
 }

@@ -1,15 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import Proptypes from "prop-types";
 import classes from "../../Main.module.css";
-import { CurrencyContext } from "../CurrencyContext";
+import { CurrencyContext } from "../CurrencyContext.jsx";
 
 const ListOfCurrenciesForBalance = (props) => {
   const [targetCurrency1, setTargetcurrency1] = useState("XAF");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
-  const [targetcurrency2, setTargetcurrency2] = useState("EUR");
-  const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
-  const [targetcurrency3, setTargetcurrency3] = useState("CHF");
-  const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
+  // const [targetcurrency2, setTargetcurrency2] = useState("EUR");
+  // const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
+  // const [targetcurrency3, setTargetcurrency3] = useState("CHF");
+  // const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
   // to call up the context
   const { getIndividualAmount, localStorCurrencies } =
@@ -18,19 +18,19 @@ const ListOfCurrenciesForBalance = (props) => {
   // if selected value the value of balance is update from the context
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name == "target_currency1" && value) {
-      setTargetcurrency1(value);
-      setTargetcurrencyInput1(getIndividualAmount(value));
+    if (e.target.name == "target_currency1" && e.target.value) {
+      setTargetcurrency1(e.target.value);
+      // const value = getIndividualAmount(e.target.value);
+      setTargetcurrencyInput1(getIndividualAmount(e.target.value));
     }
-    if (name == "target_currency2" && value) {
-      setTargetcurrency2(value);
-      setTargetcurrencyInput2(getIndividualAmount(value));
-    }
-    if (name == "target_currency3" && value) {
-        console.log(getIndividualAmount(value));
-      setTargetcurrencyInput3(getIndividualAmount(value));
-    }
+    // if (e.target.name == "target_currency2" && e.target.value) {
+    //   setTargetcurrency2(e.target.value);
+    //   setTargetcurrencyInput2(getIndividualAmount(e.target.value));
+    // }
+    // if (e.target.name == "target_currency3" && e.target.value) {
+    //   console.log(getIndividualAmount(e.target.value));
+    //   setTargetcurrencyInput3(getIndividualAmount(e.target.value));
+    // }
   };
 
   return (
@@ -63,13 +63,13 @@ const ListOfCurrenciesForBalance = (props) => {
           <span
             type="number"
             id="usd"
-            placeholder="USD"
+            placeholder="Amount"
             className={classes["span-balance"]}
           >
-            {targetcurrencyInput1}
+            {targetcurrencyInput1.toFixed(2)}
           </span>
         </div>
-        <div className={classes["div-input1"]}>
+        {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency2"
             className={classes.SelectTargetcurrency}
@@ -114,15 +114,24 @@ const ListOfCurrenciesForBalance = (props) => {
           >
             {targetcurrencyInput3}
           </span>
-        </div>
+        </div> */}
       </div>
-      <div style={{ marginTop: "5%" }}>
+      <div style={{ marginTop: "5%", display:'flex', justifyContent:'flex-start', alignItem:'center' }}>
         <span onClick={() => props.showModal()} className={classes.convert}>
-          Convert from one currency to another?
+          Convert ?
         </span>
       </div>
     </div>
   );
 };
+
+ListOfCurrenciesForBalance.prototype = {
+  targetCurrency1:Proptypes.string,
+  setTargetcurrencyInput1: Proptypes.func,
+  targetcurrencyInput1: Proptypes.number,
+  localStorCurrencies: Proptypes.array,
+  currency:Proptypes.object,
+  handleChange:Proptypes.func,
+}
 
 export default ListOfCurrenciesForBalance;

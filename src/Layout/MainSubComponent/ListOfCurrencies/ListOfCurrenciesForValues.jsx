@@ -38,20 +38,20 @@ const ListOfCurrenciesForValues = (props) => {
         );
         console.log(getIndividualAmountConvertedToBase(event.target.value));
         break;
-      case "target_currency2":
-        setTargetcurrency2(event.target.value);
-        setTargetcurrencyInput2(
-          getIndividualAmountConvertedToBase(event.target.value)
-        );
-        console.log(getIndividualAmountConvertedToBase(event.target.value));
-        break;
-      case "target_currency3":
-        setTargetcurrency3(event.target.value);
-        setTargetcurrencyInput3(
-          getIndividualAmountConvertedToBase(event.target.value)
-        );
-        console.log(getIndividualAmountConvertedToBase(event.target.value));
-        break;
+      // case "target_currency2":
+      //   setTargetcurrency2(event.target.value);
+      //   setTargetcurrencyInput2(
+      //     getIndividualAmountConvertedToBase(event.target.value)
+      //   );
+      //   console.log(getIndividualAmountConvertedToBase(event.target.value));
+      //   break;
+      // case "target_currency3":
+      //   setTargetcurrency3(event.target.value);
+      //   setTargetcurrencyInput3(
+      //     getIndividualAmountConvertedToBase(event.target.value)
+      //   );
+      //   console.log(getIndividualAmountConvertedToBase(event.target.value));
+      //   break;
       default:
         return;
     }
@@ -68,7 +68,7 @@ const ListOfCurrenciesForValues = (props) => {
               color: "chartreuse",
             }}
           >
-            Set your default currency
+            Set your base currency
           </span>
         </div>
         <select
@@ -93,7 +93,11 @@ const ListOfCurrenciesForValues = (props) => {
             color: "chartreuse",
           }}
         >
-          Select the currency to see the converted value to base currency
+          {" "}
+          <span className={classes["span1forselecttitle"]}>
+            Select to see the converted value
+          </span>
+          <span className={classes["span2forselecttitle"]}></span>
         </span>
       </div>
       <div className={classes["p-input"]}>
@@ -122,7 +126,7 @@ const ListOfCurrenciesForValues = (props) => {
           </span>
         </div>
 
-        <div className={classes["div-input1"]}>
+        {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency2"
             className={classes.SelectTargetcurrency}
@@ -167,33 +171,33 @@ const ListOfCurrenciesForValues = (props) => {
           >
             {targetcurrencyInput3.toFixed(2)}
           </span>
+        </div> */}
+      </div>
+      <div>
+        <div className={classes["default-convert-amount"]}>
+          <div onClick={() => props.showModal()} className={classes.convert}>
+            <span>Convert ?</span>
+          </div>
         </div>
-      </div>
-      <div className={classes["default-convert-amount"]}>
-        <span onClick={() => props.showModal()} className={classes.convert}>
-          Convert from one currency to another?
-        </span>
-      </div>
-      <div className={classes["div-total-in-default-curr"]}>
-        <h1
-          style={{
-            fontSize: "20px",
-            color: "chartreuse",
-            fontStyle: "italic",
-            fontFamily: "Satisfy",
-          }}
-        >
-          Total Amount : &nbsp;&nbsp;<span>{totalAmount.toFixed(2)}</span>
-          <span>&nbsp;&nbsp;{defaultCurrency}</span>
-        </h1>
+        <div className={classes["div-total-in-default-curr"]}>
+          <p className={classes["total-amount-converted"]}>
+            Total converted : &nbsp;&nbsp;
+            <span>{getTotalAmountInTargetCurrency().toFixed(2)}</span>
+            <span>&nbsp;&nbsp;{defaultCurrency}</span>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
 ListOfCurrenciesForValues.prototype = {
-  listOfCurrency: PropTypes.object,
+  localStorCurrencies: PropTypes.array,
   handleSubmit: PropTypes.func,
+  targetcurrencyInput1:PropTypes.number,
+  currency: PropTypes.object,
+  showModal:PropTypes.func,
+  handleChange:PropTypes.func,
 };
 
 export default ListOfCurrenciesForValues;
