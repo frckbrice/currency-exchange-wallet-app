@@ -13,8 +13,8 @@ const ListItem = (props) => {
     switch (e.target.className) {
       case "deposit-currency":
         depositRef.current.focus();
-        depositRef.current.style.background = "#dddddd6b";
-        depositRef.current.style.color = "rgb(127,255,0";
+        depositRef.current.style.background = "#fff";
+        depositRef.current.style.color = "black";
         balanceRef.current.style.background = "";
         addRef.current.style.background = "";
         valueRef.current.style.background = "";
@@ -25,8 +25,8 @@ const ListItem = (props) => {
       case "balance-currency":
         balanceRef.current.focus();
         depositRef.current.style.background = "";
-        balanceRef.current.style.background = "#dddddd6b";
-        balanceRef.current.style.color = "rgb(127,255,0";
+        balanceRef.current.style.background = "#fff";
+        balanceRef.current.style.color = "black";
         addRef.current.style.background = "";
         valueRef.current.style.background = "";
         valueRef.current.style.color = "";
@@ -37,8 +37,8 @@ const ListItem = (props) => {
         addRef.current.focus();
         depositRef.current.style.background = "";
         balanceRef.current.style.background = "";
-        addRef.current.style.background = "#dddddd6b";
-        addRef.current.style.color = "rgb(127,255,0";
+        addRef.current.style.background = "#fff";
+        addRef.current.style.color = "black";
         valueRef.current.style.background = "";
         valueRef.current.style.color = "";
         depositRef.current.style.color = "";
@@ -50,8 +50,8 @@ const ListItem = (props) => {
         depositRef.current.style.color = "";
         balanceRef.current.style.background = "";
         addRef.current.style.background = "";
-        valueRef.current.style.background = "#dddddd6b";
-        valueRef.current.style.color = "rgb(127,255,0";
+        valueRef.current.style.background = "#fff";
+        valueRef.current.style.color = "black";
         balanceRef.current.style.color = "";
         addRef.current.style.color = "";
         break;

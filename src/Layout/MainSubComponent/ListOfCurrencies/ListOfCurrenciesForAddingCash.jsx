@@ -49,7 +49,7 @@ const ListOfCurrenciesForAdding = (props) => {
         <h1
           style={{
             fontStyle: "italic",
-            color: "chartreuse",
+            color: "white",
             marginLeft: '20px'
           }}
         >

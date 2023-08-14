@@ -66,7 +66,7 @@ event.target.elements.input_target_currency1.value = ' ';
             style={{
               fontSize: "18px",
               fontStyle: "italic",
-              color: "chartreuse",
+              color: "#f2f2e4",
             }}
           >
             choose the currency needed

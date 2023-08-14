@@ -89,7 +89,7 @@ const Main = () => {
           onClose={() => setIsOpenModal(false)}
         />
       )}
-      <img src={reactLogo} className={classes.logo} alt="React logo" />
+      {/* <img src={reactLogo} className={classes.logo} alt="React logo" /> */}
       <div className={classes.list}>
         {/* {isvideo ?  
           (<ListItem

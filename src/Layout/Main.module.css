@@ -36,38 +36,6 @@
   overflow: clip;
 }
 
-.logo {
-  height: 8rem;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-  z-index: 2;
-  position: absolute;
-  right: 100px;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #ff57ddaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .logo {
-    animation: logo-spin infinite 1s linear;
-  }
-}
 
 .list {
   color: white;
@@ -253,8 +221,8 @@ input[type="submit"] {
 .convert1,
 .convert {
   font-size: 1.25em;
-  box-shadow: inset 0px 10px 63px -3px rgba(205, 203, 203, 0.8),
-    0px 10px 15px -3px rgba(0, 0, 0, 0.8), 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0px 10px 63px -3px rgba(205, 203, 203, 0.5),
+    0px 10px 15px -3px rgba(0, 0, 0, 0.5), 0px 10px 15px -3px rgba(0, 0, 0, 0.5);
   color: rgb(252, 252, 252);
   font-weight: bold;
   font-family: Philosopher, sans-serif;
@@ -276,6 +244,7 @@ input[type="submit"] {
   display: none;
   width: 60%;
   padding: 12px 20px;
+  color: black;
 }
 
 .displayimageinstead {
@@ -420,7 +389,7 @@ input[type="submit"] {
     padding: 15px 25px;
     height: 4rem;
     font-size: 1.5rem;
-    color: indigo;
+     color: black;
     border-radius: 14px;
   }
 
@@ -447,6 +416,7 @@ input[type="submit"] {
     height: 600px;
     background-color: rgba(0, 0, 0, 0.5);
     color: aliceblue;
+    background-image: linear-gradient(to top, #16105c 0%, #083052 100%);
   }
 
   .div-input1 {

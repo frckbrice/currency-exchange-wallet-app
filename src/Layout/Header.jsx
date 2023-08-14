@@ -6,15 +6,15 @@ const Header = () => {
     <header className={classes.header}>
       <div className={classes["div-title"]}>
         <div className={classes.subdiv1}>
-          <h5 className={classes.h5start}>WITH YOUR </h5>
+          {/* <h5 className={classes.h5start}>WITH YOUR </h5> */}
         </div>
         <div className={classes.headertitle}>
           <h1>CURRENCY WALLET</h1>
-          <h5 className={classes.h5end}> YOU </h5>
+          {/* <h5 className={classes.h5end}> YOU </h5> */}
         </div>
         <span className={classes["span-underlined"]}></span>
       </div>
-      <div className={classes.subdiv2}>
+      {/* <div className={classes.subdiv2}>
         <div className={classes["div-description"]}>
           <span>Can deposit cash =&gt; &quot;Deposit&quot;</span>
 
@@ -34,7 +34,7 @@ const Header = () => {
             &quot;
           </span>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };

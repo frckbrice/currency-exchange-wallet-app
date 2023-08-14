@@ -66,7 +66,7 @@ const ListOfCurrenciesForValues = (props) => {
             style={{
               fontSize: "20px",
               fontStyle: "italic",
-              color: "chartreuse",
+              color: "white",
             }}
           >
             Set your base currency
@@ -92,7 +92,7 @@ const ListOfCurrenciesForValues = (props) => {
           style={{
             fontSize: "20px",
             fontStyle: "italic",
-            color: "chartreuse",
+            color: "white",
           }}
         >
           {" "}

@@ -1,8 +1,11 @@
 .header {
   width: 100%;
   height: 20vh;
-  
-font-family: inherit;
+  background-image: url("https://github.githubassets.com/images/modules/site/home-campaign/hero-drone.webp");
+  background-repeat: no-repeat;
+  background-position: top right;
+
+  font-family: inherit;
   font-size: 5rem;
   margin: 0 auto;
   color: black;
@@ -21,14 +24,14 @@ font-family: inherit;
   flex-direction: column;
 }
 
-.div-title h1  {
+.div-title h1 {
   font-family: "Dancing Script", serif;
   font-weight: 900;
 }
 
-.div-title h5  {
+.div-title h5 {
   font-family: "Gloria Hallelujah", serif;
-  font-weight:lighter;
+  font-weight: lighter;
   font-size: 18px;
 }
 
@@ -51,11 +54,13 @@ font-family: inherit;
   text-align: end;
 }
 
-
 @media screen and (max-width: 768px) {
   .header {
     font-size: 3rem;
-   justify-content: center;
+    justify-content: center;
+    background-image: url("https://github.githubassets.com/images/modules/site/home-campaign/hero-drone.webp");
+    background-repeat: no-repeat;
+    background-position: bottom right 480px;
   }
 
   .headertitle {
@@ -67,7 +72,7 @@ font-family: inherit;
     text-align: center;
   }
 
-   .h5start,
+  .h5start,
   .h5end,
   .subdiv2 {
     display: none;
@@ -75,6 +80,11 @@ font-family: inherit;
 }
 
 @media screen and (max-width: 475px) {
+
+   .header {
+    background-position: bottom right 300px;
+  }
+
   .h5start,
   .h5end,
   .subdiv2 {
@@ -83,22 +93,23 @@ font-family: inherit;
 
   .div-title h1 {
     font-size: 2rem;
-   margin-left: 50px;
+    margin-left: 50px;
   }
-
 }
 
 @media screen and (max-width: 375px) {
-
   .div-title h1 {
-   margin-left: 10px;
+    margin-left: 10px;
   }
 
+    .header {
+    background-position: bottom right 250px;
+  }
 }
 
 @media screen and (max-width: 320px) {
-   .div-title h1 {
-     font-size: 1.75rem;
-   margin-left: 0;
+  .div-title h1 {
+    font-size: 1.75rem;
+    margin-left: 0;
   }
 }

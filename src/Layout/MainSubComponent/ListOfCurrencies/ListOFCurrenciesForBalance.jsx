@@ -44,7 +44,7 @@ console.log(typeof amount);
         <h1
           style={{
             fontStyle: "italic",
-            color: "chartreuse",
+            color: "white",
           }}
         >
           Balance of the Wallet
