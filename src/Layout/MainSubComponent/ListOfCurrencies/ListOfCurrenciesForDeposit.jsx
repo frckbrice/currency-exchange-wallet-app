@@ -82,6 +82,7 @@ event.target.elements.input_target_currency1.value = ' ';
             value={targetcurrency1}
             onChange={(e) => setTargetcurrency1(e.target.value)}
           >
+            
             {Object.entries(props.listOfCurrency).map((currency) => (
               <option key={currency[0]} value={currency[0]}>
                 {currency[0]}

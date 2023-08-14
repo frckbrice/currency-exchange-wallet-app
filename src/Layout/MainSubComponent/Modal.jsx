@@ -150,7 +150,7 @@ const Modal = (props) => {
                     value={target_currency}
                     onChange={handleChange}
                   >
-                    {localStorCurrencies.map((currency) => (
+                    {localStorCurrencies?.filter(currency => currency.code !== source_currency )?.map((currency) => (
                       <option value={currency.code} key={currency.code}>
                         {currency.code}
                       </option>

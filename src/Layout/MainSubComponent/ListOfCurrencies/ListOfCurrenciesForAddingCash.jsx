@@ -48,7 +48,6 @@ const ListOfCurrenciesForAdding = (props) => {
       <div className={classes["title-adding-balance"]}>
         <h1
           style={{
-          
             fontStyle: "italic",
             color: "chartreuse",
           }}
@@ -65,6 +64,7 @@ const ListOfCurrenciesForAdding = (props) => {
             value={targetcurrency1}
             onChange={(e) => setTargetcurrency1(e.target.value)}
           >
+            <option>select a currency</option>
             {localStorCurrencies?.map((currency) => (
               <option key={currency.code} value={currency.code}>
                 {currency.code}

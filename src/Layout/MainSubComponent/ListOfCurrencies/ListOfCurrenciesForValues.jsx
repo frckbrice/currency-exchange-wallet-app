@@ -4,13 +4,13 @@ import classes from "./ListOfvalues.module.css";
 import { CurrencyContext } from "../CurrencyContext";
 
 const ListOfCurrenciesForValues = (props) => {
-  const [defaultCurrency, setDefaultCurrency] = useState("USD");
-  const [targetCurrency1, setTargetcurrency1] = useState("USD");
+  const [defaultCurrency, setDefaultCurrency] = useState("");
+  const [targetCurrency1, setTargetcurrency1] = useState("");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
-  const [targetcurrency2, setTargetcurrency2] = useState("EUR");
-  const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
-  const [targetcurrency3, setTargetcurrency3] = useState("CHF");
-  const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
+  // const [targetcurrency2, setTargetcurrency2] = useState("EUR");
+  // const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
+  // const [targetcurrency3, setTargetcurrency3] = useState("CHF");
+  // const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
   const {
@@ -19,7 +19,7 @@ const ListOfCurrenciesForValues = (props) => {
     setBaseCurrency,
     localStorCurrencies,
     getIndividualAmountConvertedToBase,
-    getTotalAmountInTargetCurrency,
+    getTotalAmountInBaseCurrency,
   } = useContext(CurrencyContext);
 
   const handleChange = (event) => {
@@ -28,7 +28,7 @@ const ListOfCurrenciesForValues = (props) => {
         setDefaultCurrency(event.target.value);
         setBaseCurrency(event.target.value);
         convertAllTo(event.target.value);
-        setTotalAmount(getTotalAmountInTargetCurrency());
+        setTotalAmount(getTotalAmountInBaseCurrency());
         break;
 
       case "target_currency1":
@@ -57,6 +57,7 @@ const ListOfCurrenciesForValues = (props) => {
     }
   };
 
+
   return (
     <div className={classes.show}>
       <div className={classes["div-input"]}>
@@ -78,6 +79,7 @@ const ListOfCurrenciesForValues = (props) => {
           value={defaultCurrency}
           onChange={handleChange}
         >
+          <option>select base </option>
           {localStorCurrencies?.map((currency, index) => (
             <option key={index} value={currency.code}>
               {currency.code}
@@ -109,11 +111,14 @@ const ListOfCurrenciesForValues = (props) => {
             value={targetCurrency1}
             onChange={handleChange}
           >
-            {localStorCurrencies?.map((currency, index) => (
-              <option key={index} value={currency.code}>
-                {currency.code}
-              </option>
-            ))}
+            <option>select a currency</option>
+            {localStorCurrencies
+              ?.filter((currency) => currency.code !== defaultCurrency)
+              ?.map((currency, index) => (
+                <option key={index} value={currency.code}>
+                  {currency.code}
+                </option>
+              ))}
           </select>
 
           <span
@@ -182,7 +187,7 @@ const ListOfCurrenciesForValues = (props) => {
         <div className={classes["div-total-in-default-curr"]}>
           <p className={classes["total-amount-converted"]}>
             Total converted : &nbsp;&nbsp;
-            <span>{getTotalAmountInTargetCurrency().toFixed(2)}</span>
+            <span>{totalAmount.toFixed(2)}</span>
             <span>&nbsp;&nbsp;{defaultCurrency}</span>
           </p>
         </div>

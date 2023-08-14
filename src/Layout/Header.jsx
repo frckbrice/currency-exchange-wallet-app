@@ -17,15 +17,16 @@ const Header = () => {
       <div>
         <div className={classes["div-description"]}>
           <span>Can deposit cash =&gt; &quot;Deposit&quot;</span>
+
+          <span>Can check the balance =&gt; &quot;Balance &quot;</span>
           <span>Can set default currency =&gt; &quot;Convert&quot;</span>
-          <span>Can check the balance in =&gt; &quot;Balance &quot;</span>
           <span>
-            Can add cash on existing cash at any time =&gt; &quot; Add&quot;
+            Can add cash on existing cash at any time =&gt; &quot; Add Cash&quot;
           </span>
 
           <span>
             Can convert from currency to currency and update both currency
-            contents =&gt; &quot; Convert&quot; 
+            contents =&gt; &quot; Convert&quot;
           </span>
         </div>
       </div>

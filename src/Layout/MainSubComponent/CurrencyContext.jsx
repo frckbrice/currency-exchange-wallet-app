@@ -70,7 +70,7 @@ const CurrencyProvider = (props) => {
       if (targetCurrency && amount) {
         currencyData = {
           code: targetCurrency,
-          totalAmountInWallet: amount,
+          totalAmountInWallet: +amount,
           totalAmountInWalletConvertedTotarget: 0,
         };
         console.log(
@@ -99,7 +99,8 @@ const CurrencyProvider = (props) => {
           }
         }
       } else {
-        alert("NO Currency OR Amount Selected!");
+        alert("NO Currency OR Amount added!");
+        return;
       }
 
       console.log(
@@ -114,14 +115,14 @@ const CurrencyProvider = (props) => {
   //* get individual amount from currency
   const getIndividualAmount = useCallback(
     (targetCurrency) => {
-      console.log("%c in add getIndividualAmount : ", "color:tomato");
+      console.log("%c in getIndividualAmount : ", "color:tomato");
       console.log(localStorCurrencies);
       const targetValue =
         localStorCurrencies?.find(
           (currency) => currency.code === targetCurrency
-        )?.totalAmountInWallet || 0;
+        )?.totalAmountInWallet || 0.00;
       console.log(targetCurrency, targetValue);
-      return targetValue;
+      return +targetValue;
     },
     [localStorCurrencies]
   );
@@ -142,7 +143,7 @@ const CurrencyProvider = (props) => {
         alert("No currency in the Wallet!");
       }
 
-      return value;
+      return +value;
     },
     [localStorCurrencies]
   );
@@ -265,7 +266,7 @@ const CurrencyProvider = (props) => {
   const convertAllTo = useCallback(
     (baseCurrency) => {
       let newCurrencies = [];
-      // if the is basecurrency it has already settled in the function above
+      // if is basecurrency it has already been settled in the function above. then we can now have listofcurrencies updated accordingly to basecurrency.
       if (baseCurrency) {
         newCurrencies =
           localStorCurrencies.length > 0
@@ -294,7 +295,7 @@ const CurrencyProvider = (props) => {
   );
 
   //* get total amount of currencies converted to base currency
-  const getTotalAmountInTargetCurrency = useCallback(() => {
+  const getTotalAmountInBaseCurrency = useCallback(() => {
     let totalAmount = 0;
     if (localStorCurrencies.length > 0) {
       totalAmount = localStorCurrencies?.reduce(
@@ -360,7 +361,7 @@ const CurrencyProvider = (props) => {
     addCashToCurrencies,
     getIndividualAmountConvertedToBase,
     substractFromCurrencyToTarget,
-    getTotalAmountInTargetCurrency,
+    getTotalAmountInBaseCurrency,
   };
 
   return (
