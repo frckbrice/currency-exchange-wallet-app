@@ -1,7 +1,7 @@
 .header {
   width: 100%;
   height: 20vh;
-  /* background: linear-gradient(rgba(0 0 0 /30%), transparent ); */
+  
 font-family: inherit;
   font-size: 5rem;
   margin: 0 auto;
@@ -11,6 +11,7 @@ font-family: inherit;
   align-items: center;
   padding: 2rem 2rem;
   justify-content: space-between;
+  position: relative;
 }
 
 .div-title {
@@ -40,4 +41,64 @@ font-family: inherit;
   display: flex;
   flex-direction: column;
   font-family: "Dancing Script", tahoma;
+}
+
+.h5start {
+  text-align: left;
+}
+
+.h5end {
+  text-align: end;
+}
+
+
+@media screen and (max-width: 768px) {
+  .header {
+    font-size: 3rem;
+   justify-content: center;
+  }
+
+  .headertitle {
+    width: 100%;
+    text-align: center;
+  }
+
+  .h5end {
+    text-align: center;
+  }
+
+   .h5start,
+  .h5end,
+  .subdiv2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .h5start,
+  .h5end,
+  .subdiv2 {
+    display: none;
+  }
+
+  .div-title h1 {
+    font-size: 2rem;
+   margin-left: 50px;
+  }
+
+}
+
+@media screen and (max-width: 375px) {
+
+  .div-title h1 {
+   margin-left: 10px;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+   .div-title h1 {
+     font-size: 1.75rem;
+   margin-left: 0;
+  }
 }

@@ -1,16 +1,19 @@
 import PropTypes from "prop-types";
 import classes from "../Main.module.css";
-import { useRef } from "react";
+import { useRef} from "react";
 
-const ListItem = (props) => {
+const ListItemSelectTag = (props) => {
   const depositRef = useRef(null);
   const balanceRef = useRef(null);
   const addRef = useRef(null);
   const valueRef = useRef(null);
 
-  const handleDepositCurrency = (e) => {
-    props.showCurrencyTabElement(true, e.target.className);
-    switch (e.target.className) {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("clicked on select tag");
+    props.showCurrencyTabElement(true, e.target.value);
+    const { value } = e.target;
+    switch (value) {
       case "deposit-currency":
         depositRef.current.focus();
         depositRef.current.style.background = "#dddddd6b";
@@ -61,41 +64,38 @@ const ListItem = (props) => {
   };
 
   return (
-    
-      <ul className={classes.ul}>
-        <li
-          onClick={handleDepositCurrency}
-          className="deposit-currency"
-          ref={depositRef}
-        >
+    <>
+      {" "}
+      <select
+        name="select"
+        id="select"
+        className={classes["select-less-than-475"]}
+        defaultValue='undefinded'
+        onChange={handleClick}
+      >
+        <option name="deposit" value="deposit-currency" ref={depositRef}>
+          Select action
+        </option>
+        <option name="deposit" value="deposit-currency" ref={depositRef}>
           Deposit
-        </li>
-        <li
-          onClick={handleDepositCurrency}
-          className="balance-currency"
-          ref={balanceRef}
-        >
+        </option>
+        <option name="balance" value="balance-currency" ref={balanceRef}>
           Balance
-        </li>
-        <li onClick={handleDepositCurrency} className="add-cash" ref={addRef}>
+        </option>
+        <option name="add" value="add-cash" ref={addRef}>
           Add Cash
-        </li>
-
-        <li
-          onClick={handleDepositCurrency}
-          className="value-of-currency"
-          ref={valueRef}
-        >
-          convert
-        </li>
-      </ul>
-    
+        </option>
+        <option name="convert" value="value-of-currency" ref={valueRef}>
+          Convert
+        </option>
+      </select>
+    </>
   );
 };
 
-ListItem.propTypes = {
+ListItemSelectTag.propTypes = {
   showCurrencyTabElement: PropTypes.func,
-  handleDepositCurrency: PropTypes.func,
+  handleClick: PropTypes.func,
 };
 
-export default ListItem;
+export default ListItemSelectTag;

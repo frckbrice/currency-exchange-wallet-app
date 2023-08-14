@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import reactLogo from "../assets/react.svg";
 import classes from "./Main.module.css";
@@ -10,6 +10,7 @@ import ListOfCurrenciesForValues from "./MainSubComponent/ListOfCurrencies/ListO
 import Modal from "./MainSubComponent/Modal";
 import { useCurrency } from "./MainSubComponent/Api";
 import ListOfCurrenciesForAdding from "./MainSubComponent/ListOfCurrencies/ListOfCurrenciesForAddingCash";
+import ListItemSelectTag from "./MainSubComponent/ListItemSelectTag";
 
 const to = "";
 const from = "";
@@ -24,9 +25,17 @@ const Main = () => {
   const [showCurrencyTabValues, setShowCurrencyTabValues] = useState(false);
   const [showCurrencyTabAdding, setShowCurrencyTabAdding] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  // const [isvideo, setIsVideo] = useState(true);
 
   let { listOfCurrencies } = useCurrency(from, to);
-  console.log(typeof listOfCurrencies);
+
+  // useEffect(() => {
+  //   if(document.documentElement.scrollWidth < 476) {
+  //     setIsVideo(prev => !prev)
+  //     console.log(document.documentElement.scrollWidth);
+  //   }
+  // },[])
+
 
   const showCurrencyTabElement = useCallback((value, name) => {
     switch (name) {
@@ -64,6 +73,7 @@ const Main = () => {
       default:
         return;
     }
+    console.log('clicked')
   }, []);
 
   const showModal = useCallback(() => {
@@ -81,10 +91,28 @@ const Main = () => {
       )}
       <img src={reactLogo} className={classes.logo} alt="React logo" />
       <div className={classes.list}>
-        <ListItem
-          showCurrencyTabElement={showCurrencyTabElement}
-          config={configRef}
-        />
+        {/* {isvideo ?  
+          (<ListItem
+            showCurrencyTabElement={showCurrencyTabElement}
+            config={configRef}
+          />):( <ListItemSelectTag
+            showCurrencyTabElement={showCurrencyTabElement}
+            config={configRef}
+          />)
+        } */}
+
+        <div className={classes.displaylistitems}>
+          <ListItem
+            showCurrencyTabElement={showCurrencyTabElement}
+            config={configRef}
+          />
+        </div>
+        <div className={classes.displaylistitemselect}>
+          <ListItemSelectTag
+            showCurrencyTabElement={showCurrencyTabElement}
+            config={configRef}
+          />
+        </div>
         {showCurrencyTabDeposit && (
           <ListOfCurrenciesForDeposit listOfCurrency={listOfCurrencies} />
         )}
@@ -106,10 +134,25 @@ const Main = () => {
       </div>
       <video className={classes.video} autoPlay loop muted playsInline>
         <source
-          // src="https://cdn.dribbble.com/uploads/39421/original/963b4f8739cbdf86ca3f3a23245efd18.mp4?1657824985"
-          // type="video/mp4"
-          src="https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906" type="video/mp4"
+          src="https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906"
+          type="video/mp4"
         />
+        {/* <source
+          src="https://cdn.dribbble.com/uploads/39421/original/963b4f8739cbdf86ca3f3a23245efd18.mp4?1657824985"
+          type="video/mp4"
+        /> */}
+      </video>
+      <video
+        className={classes.displayimageinstead}
+        // className={classes.video}
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="
+          https://github.githubassets.com/images/modules/site/home/globe.jpg"
+      >
+        <source src="" />
       </video>
     </main>
   );

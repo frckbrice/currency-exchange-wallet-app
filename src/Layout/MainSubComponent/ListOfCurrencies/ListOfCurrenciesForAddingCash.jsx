@@ -50,35 +50,38 @@ const ListOfCurrenciesForAdding = (props) => {
           style={{
             fontStyle: "italic",
             color: "chartreuse",
+            marginLeft: '20px'
           }}
         >
-          Add Cash to the existing In The Walleet
+          Add Cash to the existing In The Wallet
         </h1>
       </div>
-      <div className={classes["p-input"]}>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency1"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetcurrency1}
-            onChange={(e) => setTargetcurrency1(e.target.value)}
-          >
-            <option>select a currency</option>
-            {localStorCurrencies?.map((currency) => (
-              <option key={currency.code} value={currency.code}>
-                {currency.code}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            id="usd"
-            name="input_target_currency1"
-            placeholder="Amount"
-          />
-        </div>
-        {/* <div className={classes["div-input1"]}>
+
+      <div className={classes["div-input1"]}>
+        <select
+          name="target_currency1"
+          className={classes.SelectTargetcurrency}
+          id="select-currency"
+          value={targetcurrency1}
+          onChange={(e) => setTargetcurrency1(e.target.value)}
+        >
+          <option>select a currency</option>
+          {localStorCurrencies?.map((currency) => (
+            <option key={currency.code} value={currency.code}>
+              {currency.code}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          id="usd"
+          name="input_target_currency1"
+          placeholder="Amount"
+          className={classes.inputcurrency}
+        />
+      </div>
+
+      {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency2"
             className={classes.SelectTargetcurrency}
@@ -122,7 +125,7 @@ const ListOfCurrenciesForAdding = (props) => {
             placeholder="CHF"
           />
         </div> */}
-      </div>
+
       <div className={classes["div-submit"]}>
         <button type="submit" className={classes["submit-btn"]}>
           Save

@@ -59,7 +59,7 @@ const ListOfCurrenciesForValues = (props) => {
 
 
   return (
-    <div className={classes.show}>
+    <div className={classes.showcurrvalue}>
       <div className={classes["div-input"]}>
         <div className={classes["title-defaultvalue"]}>
           <span
@@ -122,9 +122,6 @@ const ListOfCurrenciesForValues = (props) => {
           </select>
 
           <span
-            type="number"
-            id="usd"
-            placeholder="USD"
             className={classes["span-balance"]}
           >
             {targetcurrencyInput1.toFixed(2)}

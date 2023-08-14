@@ -73,31 +73,30 @@ event.target.elements.input_target_currency1.value = ' ';
           </span>
         </h1>
       </div>
-      <div className={classes["p-input"]}>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency1"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetcurrency1}
-            onChange={(e) => setTargetcurrency1(e.target.value)}
-          >
-            
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            id="usd"
-            name="input_target_currency1"
-            // onChange={(e) => setTargetcurrencyInput1(e.target.value)}
-            placeholder="Enter Amount"
-          />
-        </div>
-        {/* <div className={classes["div-input1"]}>
+
+      <div className={classes["div-input1"]}>
+        <select
+          name="target_currency1"
+          className={classes.SelectTargetcurrency}
+          id="select-currency"
+          value={targetcurrency1}
+          onChange={(e) => setTargetcurrency1(e.target.value)}
+        >
+          {Object.entries(props.listOfCurrency).map((currency) => (
+            <option key={currency[0]} value={currency[0]}>
+              {currency[0]}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          id="usd"
+          name="input_target_currency1"
+          className={classes.inputcurrency}
+          placeholder="Enter Amount"
+        />
+      </div>
+      {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency2"
             className={classes.SelectTargetcurrency}
@@ -119,7 +118,7 @@ event.target.elements.input_target_currency1.value = ' ';
             placeholder="Enter  Amount"
           />
         </div> */}
-        {/* <div className={classes["div-input1"]}>
+      {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency3"
             className={classes.SelectTargetcurrency}
@@ -141,7 +140,7 @@ event.target.elements.input_target_currency1.value = ' ';
             placeholder="Enter Amount"
           />
         </div> */}
-      </div>
+
       <div className={classes["div-submit"]}>
         <button type="submit" className={classes["submit-btn"]}>
           Save

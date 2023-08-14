@@ -50,7 +50,7 @@ console.log(typeof amount);
           Balance of the Wallet
         </h1>
       </div>
-      <div className={classes["p-input"]}>
+     
         <div className={classes["div-input1"]}>
           <select
             name="target_currency1"
@@ -121,7 +121,7 @@ console.log(typeof amount);
             {targetcurrencyInput3}
           </span>
         </div> */}
-      </div>
+    
       <div
         style={{
           marginTop: "5%",

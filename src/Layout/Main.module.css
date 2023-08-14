@@ -72,7 +72,7 @@
 .list {
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 99;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -161,28 +161,24 @@ li:hover {
   outline: none;
 }
 
-.p-input {
+/* .p-input {
   display: flex;
   align-items: center;
   margin-left: 15%;
   gap: 15px;
   justify-content: center;
-}
+} */
 
 /* *here */
 
 .div-input1 {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding-left: 30px;
   width: 40vw;
-  /* margin-left: 10%; */
+  margin-left: 150px;
 }
-
-/* .div-currency {
-  width: fit-content;
-} */
 
 .span-balance {
   width: 13rem;
@@ -203,7 +199,7 @@ li:hover {
   padding: 8px 7px;
 }
 
-input[type="number"] {
+.inputcurrency {
   height: 55px;
   color: black;
   padding: 8px 7px;
@@ -216,10 +212,6 @@ input[type="number"] {
 input[type="number"] :focus {
   outline: none;
 }
-
-/* label:nth-child(1) {
-  margin-left: 5%;
-} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -269,7 +261,6 @@ input[type="submit"] {
   cursor: pointer;
   padding: 6px 12px;
   border-radius: 8px;
-  
 }
 
 .div-total-in-default-curr {
@@ -279,7 +270,6 @@ input[type="submit"] {
   position: absolute;
   right: 5%;
   top: 8%;
-  
 }
 
 .select-less-than-475 {
@@ -288,15 +278,48 @@ input[type="submit"] {
   padding: 12px 20px;
 }
 
+.displayimageinstead {
+  display: none;
+  z-index: -1;
+  width: 100vw;
+  border: none;
+}
+
+.displaylistitems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.displaylistitemselect {
+  display: none;
+}
+
+.div-input2 {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  .p-input {
+  .overlay {
+    top: 20%;
+    height: 58%;
+    /* position: fixed; */
+  }
+
+  .main {
+    height: 60%;
+  }
+
+  /* .p-input {
     flex-wrap: nowrap;
     margin-top: 20px;
-  }
+  } */
 
   .logo {
     right: 20px;
     height: 6rem;
+    bottom: 0;: 15%;
   }
 
   .show {
@@ -311,12 +334,23 @@ input[type="submit"] {
 
   .div-input1 {
     width: 100%;
+    margin: 0;
   }
 
   .convert {
     margin: 5% 0 0 4vw;
   }
 
+  .div-for-responsive:after {
+    content: "Adverts here";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ul {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 475px) {
@@ -326,20 +360,46 @@ input[type="submit"] {
 
   .show {
     padding: 2rem 0.5rem 0 0;
+    height: 330px;
   }
 
-  .div-input1 {
+  .video {
+    display: none;
+  }
+
+  .displaylistitems {
+    display: none;
+  }
+
+  .displaylistitemselect {
+    display: block;
     width: 100%;
-    margin: 0;
-    padding: 0;
+    margin-left: 100px;
+  }
+
+  .displayimageinstead {
+    display: block;
+  }
+
+  .p-input {
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inputcurrency {
+    /* width: 20rem; */
   }
 
   .SelectTargetcurrency {
     width: 13rem;
+    margin-bottom: 3%;
+    margin-left: 0;
   }
 
   .submit-btn {
-   width: 10rem;
+    width: 10rem;
   }
 
   .span-balance {
@@ -347,7 +407,7 @@ input[type="submit"] {
   }
 
   .convert {
-    margin-right: 15px;
+    text-align: center;
   }
 
   .ul {
@@ -365,9 +425,12 @@ input[type="submit"] {
   }
 
   .logo {
-    top: 10%;
+    display: none;
   }
 
+  .overlay {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -379,19 +442,74 @@ input[type="submit"] {
   .select-less-than-475 {
     display: block;
   }
-}
 
-@media screen and (max-width: 375px) {
- .SelectTargetcurrency {
-    width: 10rem;
+  .main {
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: aliceblue;
   }
 
   .div-input1 {
-    margin-left: 15px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 15px;
   }
 
-   input[type="number"] {
-     width: 20rem;
+  .displayimageinstead {
+    display: none;
   }
 
+  .inputcurrency {
+    width: 100%;
+    margin-bottom: 0;
+    margin-right: 35px;
+  }
+
+  .span-balance {
+    width: 100%;
+    margin-right: 35px;
+  }
+
+  .SelectTargetcurrency {
+    width: 100%;
+  }
+
+  .select-less-than-475 {
+    margin-left: 0;
+    margin-right: 200px;
+  }
 }
+
+@media screen and (max-width: 320px) {
+  .displaylistitemselect {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+   .select-less-than-475 {
+   width: fit-content;
+   margin: 0;
+  }
+
+ .div-input1 {
+  padding: 0;
+ }
+
+  .inputcurrency {
+    width: 100%;
+    margin-bottom: 0;
+    margin-right: 25px;
+  }
+
+  .span-balance {
+    width: 100%;
+    margin-right: 25px;
+  }
+
+  .SelectTargetcurrency {
+    width: 100%;
+     margin-left: 5px;
+  }
+} 
