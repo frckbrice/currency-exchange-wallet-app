@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import classes from "./ListOfvalues.module.css";
 import { CurrencyContext } from "../CurrencyContext";
@@ -15,7 +15,6 @@ const ListOfCurrenciesForValues = (props) => {
 
   const {
     convertAllTo,
-    totalAmountConverted,
     setBaseCurrency,
     localStorCurrencies,
     getIndividualAmountConvertedToBase,

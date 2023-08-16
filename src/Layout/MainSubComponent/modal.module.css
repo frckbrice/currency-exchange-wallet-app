@@ -1,6 +1,6 @@
 .modal {
   position: fixed;
-  top: 15vh;
+  top: 10vh;
   left: 5%;
   width: 80%;
   font-family: Philosopher, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
@@ -20,9 +20,9 @@
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: 78vh;
+  height: 100vh;
   background: rgb(0, 0, 0);
-  opacity: 0.9;
+  opacity: 1;
   position: fixed;
 }
 
