@@ -49,7 +49,7 @@ const ListOfCurrenciesForDeposit = (props) => {
       event.target.elements.target_currency1.value,
       event.target.elements.input_target_currency1.value
     );
-event.target.elements.input_target_currency1.value = ' ';
+event.target.elements.input_target_currency1.value = '';
 
     // depositCurrencies(newFormData);
 

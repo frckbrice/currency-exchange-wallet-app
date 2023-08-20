@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import classes from "./ListOfvalues.module.css";
 import { CurrencyContext } from "../CurrencyContext";
@@ -21,13 +21,17 @@ const ListOfCurrenciesForValues = (props) => {
     getTotalAmountInBaseCurrency,
   } = useContext(CurrencyContext);
 
+  useEffect(() => {
+    setTotalAmount(getTotalAmountInBaseCurrency());
+  }, [defaultCurrency, getTotalAmountInBaseCurrency]);
+
   const handleChange = (event) => {
     switch (event.target.name) {
       case "source_currency":
         setDefaultCurrency(event.target.value);
         setBaseCurrency(event.target.value);
         convertAllTo(event.target.value);
-        setTotalAmount(getTotalAmountInBaseCurrency());
+       
         break;
 
       case "target_currency1":
