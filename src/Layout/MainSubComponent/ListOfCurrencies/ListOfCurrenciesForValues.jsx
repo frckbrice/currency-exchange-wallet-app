@@ -22,8 +22,8 @@ const ListOfCurrenciesForValues = (props) => {
   } = useContext(CurrencyContext);
 
   useEffect(() => {
-    setTotalAmount(getTotalAmountInBaseCurrency());
-  }, [defaultCurrency, getTotalAmountInBaseCurrency]);
+    setTotalAmount(0);
+  }, []);
 
   const handleChange = (event) => {
     switch (event.target.name) {
@@ -31,7 +31,7 @@ const ListOfCurrenciesForValues = (props) => {
         setDefaultCurrency(event.target.value);
         setBaseCurrency(event.target.value);
         convertAllTo(event.target.value);
-       
+        setTotalAmount(getTotalAmountInBaseCurrency());
         break;
 
       case "target_currency1":
@@ -59,7 +59,6 @@ const ListOfCurrenciesForValues = (props) => {
         return;
     }
   };
-
 
   return (
     <div className={classes.showcurrvalue}>
@@ -124,9 +123,7 @@ const ListOfCurrenciesForValues = (props) => {
               ))}
           </select>
 
-          <span
-            className={classes["span-balance"]}
-          >
+          <span className={classes["span-balance"]}>
             {targetcurrencyInput1.toFixed(2)}
           </span>
         </div>
@@ -199,10 +196,10 @@ const ListOfCurrenciesForValues = (props) => {
 ListOfCurrenciesForValues.prototype = {
   localStorCurrencies: PropTypes.array,
   handleSubmit: PropTypes.func,
-  targetcurrencyInput1:PropTypes.number,
+  targetcurrencyInput1: PropTypes.number,
   currency: PropTypes.object,
-  showModal:PropTypes.func,
-  handleChange:PropTypes.func,
+  showModal: PropTypes.func,
+  handleChange: PropTypes.func,
 };
 
 export default ListOfCurrenciesForValues;

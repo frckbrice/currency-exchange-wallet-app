@@ -31,7 +31,7 @@ const CurrencyProvider = (props) => {
     []
   );
 
-  const [base_currency, setBase_currency] = useState(base_cur);
+  const [base_currency, setBase_currency] = useState("");
   let [partAmountConverted, setPartAmountConverted] = useState(0);
   let { listOfCurrencies } = useCurrency(`${from}`, to);
 
@@ -297,17 +297,18 @@ const CurrencyProvider = (props) => {
   //* get total amount of currencies converted to base currency
   const getTotalAmountInBaseCurrency = useCallback(() => {
     let totalAmount = 0;
-    if (localStorCurrencies.length > 0) {
+    if (localStorCurrencies.length > 0 && base_currency) {
       totalAmount = localStorCurrencies?.reduce(
         (totalConvertedAmount, currency) =>
           totalConvertedAmount + currency.totalAmountInWalletConvertedTotarget,
         0
       );
       setTotalAmountConverted(totalAmount);
+     
     }
 
     return totalAmount || 0;
-  }, [localStorCurrencies]);
+  }, [localStorCurrencies, base_currency]);
 
   //* substract part of currency in balance
   const substractFromCurrencyToTarget = useCallback(

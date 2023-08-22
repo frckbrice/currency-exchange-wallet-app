@@ -122,7 +122,7 @@ console.log(typeof amount);
           </span>
         </div> */}
     
-      <div
+      {/* <div
         style={{
           marginTop: "5%",
           display: "flex",
@@ -133,7 +133,7 @@ console.log(typeof amount);
         <span onClick={() => props.showModal()} className={classes.convert}>
           Convert ?
         </span>
-      </div>
+      </div> */}
     </div>
   );
 };
