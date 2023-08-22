@@ -295,20 +295,23 @@ const CurrencyProvider = (props) => {
   );
 
   //* get total amount of currencies converted to base currency
-  const getTotalAmountInBaseCurrency = useCallback(() => {
-    let totalAmount = 0;
-    if (localStorCurrencies.length > 0 && base_currency) {
-      totalAmount = localStorCurrencies?.reduce(
-        (totalConvertedAmount, currency) =>
-          totalConvertedAmount + currency.totalAmountInWalletConvertedTotarget,
-        0
-      );
-      setTotalAmountConverted(totalAmount);
-     
-    }
+  const getTotalAmountInBaseCurrency = useCallback(
+    (baseCurrency) => {
+      let totalAmount = 0;
+      if (localStorCurrencies.length > 0 && baseCurrency) {
+        totalAmount = localStorCurrencies?.reduce(
+          (totalConvertedAmount, currency) =>
+            totalConvertedAmount +
+            currency.totalAmountInWalletConvertedTotarget,
+          0
+        );
+        setTotalAmountConverted(totalAmount);
+      }
 
-    return totalAmount || 0;
-  }, [localStorCurrencies, base_currency]);
+      return totalAmount || 0;
+    },
+    [localStorCurrencies, base_currency]
+  );
 
   //* substract part of currency in balance
   const substractFromCurrencyToTarget = useCallback(

@@ -22,7 +22,11 @@ const ListOfCurrenciesForValues = (props) => {
   } = useContext(CurrencyContext);
 
   useEffect(() => {
-    setTotalAmount(0);
+    if (!defaultCurrency) {
+      setTotalAmount(0);
+    } else {
+      setTotalAmount(getTotalAmountInBaseCurrency());
+    }
   }, []);
 
   const handleChange = (event) => {
@@ -31,7 +35,7 @@ const ListOfCurrenciesForValues = (props) => {
         setDefaultCurrency(event.target.value);
         setBaseCurrency(event.target.value);
         convertAllTo(event.target.value);
-        setTotalAmount(getTotalAmountInBaseCurrency());
+        setTotalAmount(getTotalAmountInBaseCurrency(event.target.value));
         break;
 
       case "target_currency1":
