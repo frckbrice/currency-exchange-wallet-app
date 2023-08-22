@@ -127,7 +127,7 @@ const CurrencyProvider = (props) => {
     [localStorCurrencies]
   );
 
-  //* get individual currency converted to base
+  //* get individual amount converted to base
   const getIndividualAmountConvertedToBase = useCallback(
     (targetCurrency) => {
       console.log(

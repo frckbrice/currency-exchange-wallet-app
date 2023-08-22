@@ -7,10 +7,6 @@ const ListOfCurrenciesForValues = (props) => {
   const [defaultCurrency, setDefaultCurrency] = useState("");
   const [targetCurrency1, setTargetcurrency1] = useState("");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
-  // const [targetcurrency2, setTargetcurrency2] = useState("EUR");
-  // const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
-  // const [targetcurrency3, setTargetcurrency3] = useState("CHF");
-  // const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
   const {
@@ -22,11 +18,7 @@ const ListOfCurrenciesForValues = (props) => {
   } = useContext(CurrencyContext);
 
   useEffect(() => {
-    if (!defaultCurrency) {
-      setTotalAmount(0);
-    } else {
-      setTotalAmount(getTotalAmountInBaseCurrency());
-    }
+    setTotalAmount(0);
   }, []);
 
   const handleChange = (event) => {
@@ -45,20 +37,6 @@ const ListOfCurrenciesForValues = (props) => {
         );
         console.log(getIndividualAmountConvertedToBase(event.target.value));
         break;
-      // case "target_currency2":
-      //   setTargetcurrency2(event.target.value);
-      //   setTargetcurrencyInput2(
-      //     getIndividualAmountConvertedToBase(event.target.value)
-      //   );
-      //   console.log(getIndividualAmountConvertedToBase(event.target.value));
-      //   break;
-      // case "target_currency3":
-      //   setTargetcurrency3(event.target.value);
-      //   setTargetcurrencyInput3(
-      //     getIndividualAmountConvertedToBase(event.target.value)
-      //   );
-      //   console.log(getIndividualAmountConvertedToBase(event.target.value));
-      //   break;
       default:
         return;
     }
@@ -131,53 +109,6 @@ const ListOfCurrenciesForValues = (props) => {
             {targetcurrencyInput1.toFixed(2)}
           </span>
         </div>
-
-        {/* <div className={classes["div-input1"]}>
-          <select
-            name="target_currency2"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetcurrency2}
-            onChange={handleChange}
-          >
-            {localStorCurrencies?.map((currency, index) => (
-              <option key={index} value={currency.code}>
-                {currency.code}
-              </option>
-            ))}
-          </select>
-          <span
-            type="number"
-            id="usd"
-            placeholder="USD"
-            className={classes["span-balance"]}
-          >
-            {targetcurrencyInput2.toFixed(2)}
-          </span>
-        </div>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency3"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetcurrency3}
-            onChange={handleChange}
-          >
-            {localStorCurrencies?.map((currency, index) => (
-              <option key={index} value={currency.code}>
-                {currency.code}
-              </option>
-            ))}
-          </select>
-          <span
-            type="number"
-            id="usd"
-            placeholder="USD"
-            className={classes["span-balance"]}
-          >
-            {targetcurrencyInput3.toFixed(2)}
-          </span>
-        </div> */}
       </div>
       <div>
         <div className={classes["default-convert-amount"]}>
