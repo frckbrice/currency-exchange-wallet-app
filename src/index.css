@@ -10,6 +10,8 @@
   margin: 0;
 }
 
-body.modal-open {
-  /* filter: blur(2px); */
+
+body {
+  width: 100vw;
+  height: 100vh;
 }

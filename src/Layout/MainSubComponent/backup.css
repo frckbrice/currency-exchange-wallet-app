@@ -7,7 +7,7 @@
 
 .main {
   max-width: 100vw;
-  height: 60vh;
+  height: 70vh;
   position: relative;
   background: white;
   overflow: hidden;
@@ -15,12 +15,12 @@
 }
 
 .overlay {
-  top: 20vh;
+  top: 15vh;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: 60vh;
+  height: 70vh;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0.9;
   position: fixed;
@@ -31,16 +31,49 @@
   width: 100vw;
   border: none;
   transition: all 0.8s ease-in-out;
-  object-fit: contain;
+  object-fit: fill;
   overflow-clip-margin: content-box;
   overflow: clip;
+  top: 15vh;
 }
 
+.logo {
+  height: 8rem;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  z-index: 2;
+  position: absolute;
+  right: 100px;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #ff57ddaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 1s linear;
+  }
+}
 
 .list {
   color: white;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,8 +97,6 @@ li {
   padding: 10px 20px;
   font-weight: bold;
   cursor: pointer;
-  /* box-shadow: rgba(0, 0, 0, 0.25) -1px -10px 5px,
-    rgba(124, 110, 110, 0.244) 0px 10px 10px; */
 }
 
 li:nth-child(1) {
@@ -129,24 +160,28 @@ li:hover {
   outline: none;
 }
 
-/* .p-input {
+.p-input {
   display: flex;
   align-items: center;
   margin-left: 15%;
   gap: 15px;
   justify-content: center;
-} */
+}
 
 /* *here */
 
 .div-input1 {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 30px;
   width: 40vw;
-  margin-left: 150px;
+  /* margin-left: 10%; */
 }
+
+/* .div-currency {
+  width: fit-content;
+} */
 
 .span-balance {
   width: 13rem;
@@ -167,7 +202,7 @@ li:hover {
   padding: 8px 7px;
 }
 
-.inputcurrency {
+input[type="number"] {
   height: 55px;
   color: black;
   padding: 8px 7px;
@@ -180,6 +215,10 @@ li:hover {
 input[type="number"] :focus {
   outline: none;
 }
+
+/* label:nth-child(1) {
+  margin-left: 5%;
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -221,14 +260,15 @@ input[type="submit"] {
 .convert1,
 .convert {
   font-size: 1.25em;
-  box-shadow: inset 0px 10px 63px -3px rgba(205, 203, 203, 0.5),
-    0px 10px 15px -3px rgba(0, 0, 0, 0.5), 0px 10px 15px -3px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 10px 63px -3px rgba(205, 203, 203, 0.8),
+    0px 10px 15px -3px rgba(0, 0, 0, 0.8), 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
   color: rgb(252, 252, 252);
   font-weight: bold;
   font-family: Philosopher, sans-serif;
   cursor: pointer;
   padding: 6px 12px;
   border-radius: 8px;
+  
 }
 
 .div-total-in-default-curr {
@@ -238,57 +278,24 @@ input[type="submit"] {
   position: absolute;
   right: 5%;
   top: 8%;
+  
 }
 
 .select-less-than-475 {
   display: none;
   width: 60%;
   padding: 12px 20px;
-  color: black;
-}
-
-.displayimageinstead {
-  display: none;
-  z-index: -1;
-  width: 100vw;
-  border: none;
-}
-
-.displaylistitems {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.displaylistitemselect {
-  display: none;
-}
-
-.div-input2 {
-  display: none;
 }
 
 @media screen and (max-width: 768px) {
-  .overlay {
-    top: 20%;
-    height: 58%;
-    /* position: fixed; */
-  }
-
-  .main {
-    height: 60%;
-  }
-
-  /* .p-input {
+  .p-input {
     flex-wrap: nowrap;
     margin-top: 20px;
-  } */
+  }
 
   .logo {
     right: 20px;
     height: 6rem;
-    bottom: 0;: 15%;
   }
 
   .show {
@@ -303,23 +310,12 @@ input[type="submit"] {
 
   .div-input1 {
     width: 100%;
-    margin: 0;
   }
 
   .convert {
     margin: 5% 0 0 4vw;
   }
 
-  .div-for-responsive:after {
-    content: "Adverts here";
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .ul {
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 475px) {
@@ -329,46 +325,20 @@ input[type="submit"] {
 
   .show {
     padding: 2rem 0.5rem 0 0;
-    height: 330px;
   }
 
-  .video {
-    display: none;
-  }
-
-  .displaylistitems {
-    display: none;
-  }
-
-  .displaylistitemselect {
-    display: block;
+  .div-input1 {
     width: 100%;
-    margin-left: 100px;
-  }
-
-  .displayimageinstead {
-    display: block;
-  }
-
-  .p-input {
-    margin-left: 5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .inputcurrency {
-    /* width: 20rem; */
+    margin: 0;
+    padding: 0;
   }
 
   .SelectTargetcurrency {
     width: 13rem;
-    margin-bottom: 3%;
-    margin-left: 0;
   }
 
   .submit-btn {
-    width: 10rem;
+   width: 10rem;
   }
 
   .span-balance {
@@ -376,7 +346,7 @@ input[type="submit"] {
   }
 
   .convert {
-    text-align: center;
+    margin-right: 15px;
   }
 
   .ul {
@@ -389,17 +359,14 @@ input[type="submit"] {
     padding: 15px 25px;
     height: 4rem;
     font-size: 1.5rem;
-     color: black;
+    color: indigo;
     border-radius: 14px;
   }
 
   .logo {
-    display: none;
+    top: 10%;
   }
 
-  .overlay {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 425px) {
@@ -411,75 +378,19 @@ input[type="submit"] {
   .select-less-than-475 {
     display: block;
   }
+}
 
-  .main {
-    height: 600px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: aliceblue;
-    background-image: linear-gradient(to top, #16105c 0%, #083052 100%);
+@media screen and (max-width: 375px) {
+ .SelectTargetcurrency {
+    width: 10rem;
   }
 
   .div-input1 {
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
-    padding-left: 15px;
+    margin-left: 15px;
   }
 
-  .displayimageinstead {
-    display: none;
+   input[type="number"] {
+     width: 20rem;
   }
 
-  .inputcurrency {
-    width: 100%;
-    margin-bottom: 0;
-    margin-right: 35px;
-  }
-
-  .span-balance {
-    width: 100%;
-    margin-right: 35px;
-  }
-
-  .SelectTargetcurrency {
-    width: 100%;
-  }
-
-  .select-less-than-475 {
-    margin-left: 0;
-    margin-right: 200px;
-  }
 }
-
-@media screen and (max-width: 320px) {
-  .displaylistitemselect {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-   .select-less-than-475 {
-   width: fit-content;
-   margin: 0;
-  }
-
- .div-input1 {
-  padding: 0;
- }
-
-  .inputcurrency {
-    width: 100%;
-    margin-bottom: 0;
-    margin-right: 25px;
-  }
-
-  .span-balance {
-    width: 100%;
-    margin-right: 25px;
-  }
-
-  .SelectTargetcurrency {
-    width: 100%;
-     margin-left: 5px;
-  }
-} 

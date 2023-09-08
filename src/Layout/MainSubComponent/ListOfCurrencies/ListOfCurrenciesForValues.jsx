@@ -1,178 +1,140 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import classes from "../../Main.module.css";
+import classes from "./ListOfvalues.module.css";
 import { CurrencyContext } from "../CurrencyContext";
 
 const ListOfCurrenciesForValues = (props) => {
-  const [defaultCurrency, setDefaultCurrency] = useState("USD");
-  const [targetCurrency1, setTargetcurrency1] = useState("USD");
+  const [defaultCurrency, setDefaultCurrency] = useState("");
+  const [targetCurrency1, setTargetcurrency1] = useState("");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
-  const [targetcurrency2, setTargetcurrency2] = useState("EUR");
-  const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
-  const [targetcurrency3, setTargetcurrency3] = useState("CHF");
-  const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
   const {
     convertAllTo,
-    totalAmountConverted,
     setBaseCurrency,
-    getIndividualAmount,
+    localStorCurrencies,
+    getIndividualAmountConvertedToBase,
+    getTotalAmountInBaseCurrency,
   } = useContext(CurrencyContext);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "source_currency") {
-      setDefaultCurrency(value);
-      setBaseCurrency(value, props.listOfCurrency);
-      convertAllTo(value);
-      setTotalAmount(totalAmountConverted);
-    }
-    if (name === "target_currency1" && value) {
-      setTargetcurrency1(value);
-      setTargetcurrencyInput1(getIndividualAmount(value));
-    }
-    if (name === "target_currency3" && value) {
-      setTargetcurrency3(value);
-      setTargetcurrencyInput2(getIndividualAmount(value));
-    }
-    if (name === "target_currency2" && value) {
-      setTargetcurrency2(value);
-      setTargetcurrencyInput3(getIndividualAmount(value));
-    }
-  };
+  useEffect(() => {
+    setTotalAmount(0);
+  }, []);
 
-  const handleSubmit = (event) => {
-    event.preventdefault();
+  const handleChange = (event) => {
+    switch (event.target.name) {
+      case "source_currency":
+        setDefaultCurrency(event.target.value);
+        setBaseCurrency(event.target.value);
+        convertAllTo(event.target.value);
+        setTotalAmount(getTotalAmountInBaseCurrency(event.target.value));
+        break;
+
+      case "target_currency1":
+        setTargetcurrency1(event.target.value);
+        setTargetcurrencyInput1(
+          getIndividualAmountConvertedToBase(event.target.value)
+        );
+        console.log(getIndividualAmountConvertedToBase(event.target.value));
+        break;
+      default:
+        return;
+    }
   };
 
   return (
-    <div className={classes.show}>
-      <form action="submit" onSubmit={handleSubmit}>
-        <div className={classes["div-input"]}>
-          <label
-            htmlFor="select-currency"
+    <div className={classes.showcurrvalue}>
+      <div className={classes["div-input"]}>
+        <div className={classes["title-defaultvalue"]}>
+          <span
             style={{
-              marginLeft: "1.3%",
-              marginBottom: "1.3%",
-              fontSize: "18px",
-              display: "none",
+              fontSize: "20px",
+              fontStyle: "italic",
+              color: "white",
             }}
           >
-            Select default currency
-          </label>
-          <select
-            name="source_currency"
-            className={classes.Selectcurrency}
-            id="select-currency"
-            value={defaultCurrency}
-            onChange={handleChange}
-          >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className={classes["p-input"]}>
-          <div className={classes["div-input1"]} >
-            <select
-              name="target_currency1"
-              className={classes.SelectTargetcurrency}
-              id="select-currency"
-              value={targetCurrency1}
-              onChange={handleChange}
-            >
-              {Object.entries(props.listOfCurrency).map((currency) => (
-                <option key={currency[0]} value={currency[0]}>
-                  {currency[0]}
-                </option>
-              ))}
-            </select>
-
-            <span
-              type="number"
-              id="usd"
-              placeholder="USD"
-              className={classes["span-balance"]}
-            >
-              {targetcurrencyInput1}
-            </span>
-          </div>
-        </div>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency2"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetcurrency2}
-            onChange={handleChange}
-          >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
-              </option>
-            ))}
-          </select>
-          <span
-            type="number"
-            id="usd"
-            placeholder="USD"
-            className={classes["span-balance"]}
-          >
-            {targetcurrencyInput2}
+            Set your base currency
           </span>
         </div>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency3"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetcurrency3}
-            onChange={handleChange}
-          >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
-              </option>
-            ))}
-          </select>
-          <span
-            type="number"
-            id="usd"
-            placeholder="USD"
-            className={classes["span-balance"]}
-          >
-            {targetcurrencyInput3}
+        <select
+          name="source_currency"
+          className={classes.Selectcurrency}
+          id="select-currency"
+          value={defaultCurrency}
+          onChange={handleChange}
+        >
+          <option>select base </option>
+          {localStorCurrencies?.map((currency, index) => (
+            <option key={index} value={currency.code}>
+              {currency.code}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className={classes["title-value"]}>
+        <span
+          style={{
+            fontSize: "20px",
+            fontStyle: "italic",
+            color: "white",
+          }}
+        >
+          {" "}
+          <span className={classes["span1forselecttitle"]}>
+            Select to see the converted value
           </span>
-        </div>
-
-        {/* <div className={classes["div-submit"]}>
-          <button type="submit" className={classes["submit-btn"]}>
-            Save
-          </button>
-        </div> */}
-      </form>
-      <div style={{ marginTop: "2%" }}>
-        <span onClick={() => props.showModal()} className={classes.convert}>
-          Convert from one currency to another?
+          <span className={classes["span2forselecttitle"]}></span>
         </span>
       </div>
-      <div className={classes["div-total-in-default-curr"]}>
-        <h1>
-          Total Amount : <span>{totalAmount}</span>
-          <span>{"  " + defaultCurrency}</span>
-        </h1>
+      <div className={classes["p-input"]}>
+        <div className={classes["div-input1"]}>
+          <select
+            name="target_currency1"
+            className={classes.SelectTargetcurrency}
+            id="select-currency"
+            value={targetCurrency1}
+            onChange={handleChange}
+          >
+            <option>select a currency</option>
+            {localStorCurrencies
+              ?.filter((currency) => currency.code !== defaultCurrency)
+              ?.map((currency, index) => (
+                <option key={index} value={currency.code}>
+                  {currency.code}
+                </option>
+              ))}
+          </select>
+
+          <span className={classes["span-balance"]}>
+            {targetcurrencyInput1.toFixed(2)}
+          </span>
+        </div>
+      </div>
+      <div>
+        <div className={classes["default-convert-amount"]}>
+          <div onClick={() => props.showModal()} className={classes.convert}>
+            <span>Convert ?</span>
+          </div>
+        </div>
+        <div className={classes["div-total-in-default-curr"]}>
+          <p className={classes["total-amount-converted"]}>
+            Total converted : &nbsp;&nbsp;
+            <span>{totalAmount.toFixed(2)}</span>
+            <span>&nbsp;&nbsp;{defaultCurrency}</span>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
 ListOfCurrenciesForValues.prototype = {
-  listOfCurrency: PropTypes.object,
+  localStorCurrencies: PropTypes.array,
   handleSubmit: PropTypes.func,
+  targetcurrencyInput1: PropTypes.number,
+  currency: PropTypes.object,
+  showModal: PropTypes.func,
+  handleChange: PropTypes.func,
 };
 
 export default ListOfCurrenciesForValues;

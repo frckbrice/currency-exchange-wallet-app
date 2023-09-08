@@ -1,0 +1,400 @@
+#root {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Philosopher, sans-serif;
+}
+
+.main {
+  max-width: 100vw;
+  height: 78vh;
+  position: relative;
+  background: white;
+  overflow: hidden;
+  padding: 0;
+}
+
+.overlay {
+  top: 12vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 78vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0.9;
+  position: fixed;
+}
+
+.video {
+  z-index: -1;
+  width: 100vw;
+  border: none;
+  transition: all 0.8s ease-in-out;
+  object-fit: contain;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+.logo {
+  height: 8rem;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  z-index: 2;
+  position: absolute;
+  right: 100px;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #ff57ddaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+
+.showcurrvalue {
+  width: 70%;
+  min-width: 60%;
+  border: 1px solid #dddddd6b;
+  border-radius: 15px;
+  padding: 1rem 1rem;
+  margin: 5rem 0 0;
+  font-family: Philosopher, sans-serif;
+  height: auto;
+  position: relative;
+}
+
+.SelectTargetcurrency,
+.Selectcurrency {
+  min-width: 21%;
+  height: 55px;
+  font-family: Philosopher, sans-serif;
+  border-radius: 8px;
+  /* display: none; */
+  font-size: 20px;
+  padding: 10px 15px;
+  color: black;
+  outline-color: none;
+  margin: 0 10% 0 10px;
+}
+
+.Selectcurrency {
+  margin-left: 2.3%;
+}
+
+.title-adding-balance {
+  text-align: center;
+  margin: 0 0 3%;
+  font-family: Philosopher, Tahoma;
+  font-size: 30px;
+}
+
+.Selectcurrency:focus {
+  outline: none;
+}
+
+.p-input {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 3%;
+  gap: 15px;
+  justify-content: center;
+}
+
+.div-input {
+  margin: 0 0 50px 2.5%;
+}
+
+.div-input1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 30%;
+}
+
+.title-defaultvalue {
+  margin: 0 0 10px 2.5%;
+} 
+
+.title-value{
+  margin: 0 0 10px 5%;
+}
+
+.span-balance {
+  width: 15rem;
+  /* margin-right: 5rem; */
+  height: 3.5rem;
+  border-radius: 8px;
+  color: black;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 5px;
+  font-size: 1.25rem;
+}
+
+.SelectTargetcurrency {
+  width: 15rem;
+  height: 3.5rem;
+}
+
+
+.default-convert-amount {
+  margin-top: 6%;
+}
+
+input[type="number"] :focus {
+  outline: none;
+}
+
+/* label:nth-child(1) {
+  margin-left: 5%;
+} */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* label {
+  margin-right: 10px;
+  font-size: 20px;
+} */
+
+.submit-btn,
+input[type="submit"] {
+  width: 20%;
+  height: 55px;
+  font-size: 22px;
+  font-family: Philosopher, sans-serif;
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: inset 0px 10px 63px -3px rgba(205, 203, 203, 0.8),
+    0px 10px 15px -3px rgba(0, 0, 0, 0.8), 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
+  font-weight: 900;
+}
+
+.div-submit {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 7% auto 0;
+}
+
+.convert {
+  width: auto;
+  
+}
+
+.convert span {
+  margin-left: 4.3%;
+  /* margin-top: 6%; */
+  font-size: 1.25em;
+   box-shadow: inset 0px 10px 63px -3px rgba(205, 203, 203, 0.5),
+    0px 10px 15px -3px rgba(0, 0, 0, 0.5), 0px 10px 15px -3px rgba(0, 0, 0, 0.5);
+  color: rgb(245, 249, 250);
+  font-weight: bold;
+  font-family: Philosopher, sans-serif;
+  cursor: pointer;
+  /* width: fit-content; */
+  padding: 6px 12px;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+}
+
+.div-total-in-default-curr {
+  width: fit-content;
+  padding: 8px 16px;
+  margin-left: 15%;
+  position: absolute;
+  right: 5%;
+  top: 18%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.total-amount-converted {
+  font-size: 20px;
+  color: rgb(244, 247, 242);
+  font-family: Philosopher, sans-serif;
+  font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+  .p-input {
+    flex-wrap: nowrap;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+
+  .logo {
+    right: 20px;
+    height: 6rem;
+  }
+
+  .showcurrvalue {
+    width: 95%;
+    margin-top: 2rem;
+  }
+
+  .convert {
+    margin: 10% 0 0 1vw;
+  }
+
+  .Selectcurrency {
+    width: 15rem;
+  }
+
+ 
+
+}
+
+@media screen and (max-width: 475px) {
+  .div-input1 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .Selectcurrency {
+    width: 90%;
+    margin-left: 20px;
+  }
+
+  .submit-btn {
+   width: 10rem;
+  }
+
+  .span-balance {
+    margin-right: 1rem;
+  }
+
+  .div-total-in-default-curr {
+    top: 30%;
+    width: 80%;
+    margin-right: 20px;
+  }
+
+  .title-value {
+    margin-top: 100px;
+    margin-left: 50px;
+  }
+
+  .convert {
+    margin: 10% 0 0 30vw;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  .title-value {
+    margin-left: 30px;
+  }
+
+
+  .title-defaultvalue {
+    margin-left: 25px;
+  }
+
+   .div-total-in-default-curr {
+    margin-right: 15px;
+  }
+
+  .div-input1 {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .SelectTargetcurrency {
+    width: 22rem;
+    margin-left: 20px;
+    margin-right: 0;
+  }
+
+  .span-balance {
+    width: 22rem;
+    margin-left: 20px;
+    margin-right: 0;
+  }
+
+}
+
+@media screen and (max-width: 375px) {
+
+
+  .div-total-in-default-curr {
+    top: 30%;
+    width: 18rem;
+    margin-right: 20px;
+  }
+
+  .SelectTargetcurrency {
+    width: 20rem;
+    margin-left: 20px;
+    margin: 0;
+  }
+
+  .span1forselecttitle {
+    display: none;
+  }
+
+  .span2forselecttitle::after {
+    content: "select currency, see value";
+    margin-right: 10px;
+  }
+
+  .span-balance {
+     width: 20rem;
+    margin-left: 0;
+  }
+
+  .Selectcurrency {
+     width: 19rem;
+    margin-left: 20px;
+    margin: 0;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+
+
+  .div-total-in-default-curr {
+    top: 30%;
+    width: 16rem;
+    margin-right: 10px;
+  }
+
+  .Selectcurrency {
+     width: 16rem;
+    margin-left: 20px;
+    margin: 0;
+  }
+
+}

@@ -1,20 +1,23 @@
 import PropTypes from "prop-types";
 import classes from "../Main.module.css";
-import { useRef } from "react";
+import { useRef} from "react";
 
-const ListItem = (props) => {
+const ListItemSelectTag = (props) => {
   const depositRef = useRef(null);
   const balanceRef = useRef(null);
   const addRef = useRef(null);
   const valueRef = useRef(null);
 
-  const handleDepositCurrency = (e) => {
-    props.showCurrencyTabElement(true, e.target.className);
-    switch (e.target.className) {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("clicked on select tag");
+    props.showCurrencyTabElement(true, e.target.value);
+    const { value } = e.target;
+    switch (value) {
       case "deposit-currency":
         depositRef.current.focus();
-        depositRef.current.style.background = "#fff";
-        depositRef.current.style.color = "black";
+        depositRef.current.style.background = "#dddddd6b";
+        depositRef.current.style.color = "rgb(127,255,0";
         balanceRef.current.style.background = "";
         addRef.current.style.background = "";
         valueRef.current.style.background = "";
@@ -25,8 +28,8 @@ const ListItem = (props) => {
       case "balance-currency":
         balanceRef.current.focus();
         depositRef.current.style.background = "";
-        balanceRef.current.style.background = "#fff";
-        balanceRef.current.style.color = "black";
+        balanceRef.current.style.background = "#dddddd6b";
+        balanceRef.current.style.color = "rgb(127,255,0";
         addRef.current.style.background = "";
         valueRef.current.style.background = "";
         valueRef.current.style.color = "";
@@ -37,8 +40,8 @@ const ListItem = (props) => {
         addRef.current.focus();
         depositRef.current.style.background = "";
         balanceRef.current.style.background = "";
-        addRef.current.style.background = "#fff";
-        addRef.current.style.color = "black";
+        addRef.current.style.background = "#dddddd6b";
+        addRef.current.style.color = "rgb(127,255,0";
         valueRef.current.style.background = "";
         valueRef.current.style.color = "";
         depositRef.current.style.color = "";
@@ -50,8 +53,8 @@ const ListItem = (props) => {
         depositRef.current.style.color = "";
         balanceRef.current.style.background = "";
         addRef.current.style.background = "";
-        valueRef.current.style.background = "#fff";
-        valueRef.current.style.color = "black";
+        valueRef.current.style.background = "#dddddd6b";
+        valueRef.current.style.color = "rgb(127,255,0";
         balanceRef.current.style.color = "";
         addRef.current.style.color = "";
         break;
@@ -61,41 +64,38 @@ const ListItem = (props) => {
   };
 
   return (
-    
-      <ul className={classes.ul}>
-        <li
-          onClick={handleDepositCurrency}
-          className="deposit-currency"
-          ref={depositRef}
-        >
+    <>
+      {" "}
+      <select
+        name="select"
+        id="select"
+        className={classes["select-less-than-475"]}
+        defaultValue='undefinded'
+        onChange={handleClick}
+      >
+        <option name="deposit" value="deposit-currency" ref={depositRef}>
+          Select action
+        </option>
+        <option name="deposit" value="deposit-currency" ref={depositRef}>
           Deposit
-        </li>
-        <li
-          onClick={handleDepositCurrency}
-          className="balance-currency"
-          ref={balanceRef}
-        >
+        </option>
+        <option name="balance" value="balance-currency" ref={balanceRef}>
           Balance
-        </li>
-        <li onClick={handleDepositCurrency} className="add-cash" ref={addRef}>
+        </option>
+        <option name="add" value="add-cash" ref={addRef}>
           Add Cash
-        </li>
-
-        <li
-          onClick={handleDepositCurrency}
-          className="value-of-currency"
-          ref={valueRef}
-        >
-          convert
-        </li>
-      </ul>
-    
+        </option>
+        <option name="convert" value="value-of-currency" ref={valueRef}>
+          Convert
+        </option>
+      </select>
+    </>
   );
 };
 
-ListItem.propTypes = {
+ListItemSelectTag.propTypes = {
   showCurrencyTabElement: PropTypes.func,
-  handleDepositCurrency: PropTypes.func,
+  handleClick: PropTypes.func,
 };
 
-export default ListItem;
+export default ListItemSelectTag;

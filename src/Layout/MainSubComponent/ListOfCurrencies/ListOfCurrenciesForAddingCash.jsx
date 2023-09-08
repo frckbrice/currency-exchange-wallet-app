@@ -4,57 +4,84 @@ import classes from "../../Main.module.css";
 import { CurrencyContext } from "../CurrencyContext";
 
 const ListOfCurrenciesForAdding = (props) => {
-  const [targetCurrency1, setTargetcurrency1] = useState("XAF");
+  const [targetcurrency1, setTargetcurrency1] = useState("Currency");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
-  const [targetcurrency2, setTargetcurrency2] = useState("EUR");
-  const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
-  const [targetcurrency3, setTargetcurrency3] = useState("CHF");
-  const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
+  // const [targetcurrency2, setTargetcurrency2] = useState("EUR");
+  // const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
+  // const [targetcurrency3, setTargetcurrency3] = useState("CHF");
+  // const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
-  const { addCashToCurrency } = useContext(CurrencyContext);
+  const { addCashToCurrencies, localStorCurrencies, addCashToCurrency } =
+    useContext(CurrencyContext);
 
-  const handleSubmit = (e) => {
-    e.preventdefault();
-     if (targetCurrency1 && targetcurrencyInput1) {
-       addCashToCurrency(targetCurrency1, targetcurrencyInput1);
-     }
-     if (targetcurrency2 && targetcurrencyInput2) {
-       addCashToCurrency(targetCurrency1, targetcurrencyInput1);
-     }
-     if (targetcurrency3 && targetcurrencyInput3) {
-       addCashToCurrency(targetCurrency1, targetcurrencyInput1);
-     }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // const newFormData = [
+    //   {
+    //     code: targetcurrency1,
+    //     totalAmountInWallet: parseFloat(targetcurrencyInput1),
+    //     totalAmountInWalletConvertedTotarget: 0,
+    //   },
+    //   {
+    //     code: targetcurrency2,
+    //     totalAmountInWallet: parseFloat(targetcurrencyInput2),
+    //     totalAmountInWalletConvertedTotarget: 0,
+    //   },
+    //   {
+    //     code: targetcurrency3,
+    //     totalAmountInWallet: parseFloat(targetcurrencyInput3),
+    //     totalAmountInWalletConvertedTotarget: 0,
+    //   },
+    // ];
+
+    // addCashToCurrencies(newFormData);
+     addCashToCurrency(
+       event.target.elements.target_currency1.value,
+       event.target.elements.input_target_currency1.value
+     );
+   event.target.elements.input_target_currency1.value = ' ';
   };
 
   return (
     <form className={classes.show} onSubmit={handleSubmit}>
-      <div className={classes['title-adding-balance']}>
-        <h1>Add Cash In The Balance</h1>
+      <div className={classes["title-adding-balance"]}>
+        <h1
+          style={{
+            fontStyle: "italic",
+            color: "white",
+            marginLeft: '20px'
+          }}
+        >
+          Add Cash to the existing In The Wallet
+        </h1>
       </div>
-      <div className={classes["p-input"]}>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency1"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetCurrency1}
-            onChange={(e) => setTargetcurrency1(e.target.value)}
-          >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            id="usd"
-            name="input_target_currency1"
-            onChange={(e) => setTargetcurrencyInput1(e.target.value)}
-            placeholder="USD"
-          />
-        </div>
-        <div className={classes["div-input1"]}>
+
+      <div className={classes["div-input1"]}>
+        <select
+          name="target_currency1"
+          className={classes.SelectTargetcurrency}
+          id="select-currency"
+          value={targetcurrency1}
+          onChange={(e) => setTargetcurrency1(e.target.value)}
+        >
+          <option>select a currency</option>
+          {localStorCurrencies?.map((currency) => (
+            <option key={currency.code} value={currency.code}>
+              {currency.code}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          id="usd"
+          name="input_target_currency1"
+          placeholder="Amount"
+          className={classes.inputcurrency}
+        />
+      </div>
+
+      {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency2"
             className={classes.SelectTargetcurrency}
@@ -62,9 +89,9 @@ const ListOfCurrenciesForAdding = (props) => {
             value={targetcurrency2}
             onChange={(e) => setTargetcurrency2(e.target.value)}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
@@ -84,9 +111,9 @@ const ListOfCurrenciesForAdding = (props) => {
             value={targetcurrency3}
             onChange={(e) => setTargetcurrency3(e.target.value)}
           >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
+            {localStorCurrencies?.map((currency) => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code}
               </option>
             ))}
           </select>
@@ -97,8 +124,8 @@ const ListOfCurrenciesForAdding = (props) => {
             onChange={(e) => setTargetcurrencyInput3(e.target.value)}
             placeholder="CHF"
           />
-        </div>
-      </div>
+        </div> */}
+
       <div className={classes["div-submit"]}>
         <button type="submit" className={classes["submit-btn"]}>
           Save

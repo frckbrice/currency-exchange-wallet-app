@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import classes from "../../Main.module.css";
 import { CurrencyContext } from "../CurrencyContext";
@@ -14,69 +14,89 @@ module.exports = {
  */
 
 const ListOfCurrenciesForDeposit = (props) => {
-  const [targetCurrency1, setTargetcurrency1] = useState("XAF");
+  const [targetcurrency1, setTargetcurrency1] = useState("USD");
   const [targetcurrencyInput1, setTargetcurrencyInput1] = useState(0);
-  const [targetcurrency2, setTargetcurrency2] = useState("EUR");
-  const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
-  const [targetcurrency3, setTargetcurrency3] = useState("CHF");
-  const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
+  // const [targetcurrency2, setTargetcurrency2] = useState("EUR");
+  // const [targetcurrencyInput2, setTargetcurrencyInput2] = useState(0);
+  // const [targetcurrency3, setTargetcurrency3] = useState("CHF");
+  // const [targetcurrencyInput3, setTargetcurrencyInput3] = useState(0);
 
-  const { depositCurrency } = useContext(CurrencyContext);
+  //* call of context
+  const { depositCurrencies, depositCurrency } = useContext(CurrencyContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-     if(targetCurrency1 && targetcurrencyInput1){
-      depositCurrency(targetCurrency1,targetcurrencyInput1);
-     }
-     if (targetcurrency2 && targetcurrencyInput2) {
-       depositCurrency(targetcurrency2, targetcurrencyInput2);
-     }
-     if (targetcurrency3 && targetcurrencyInput3) {
-       depositCurrency(targetcurrency3, targetcurrencyInput3);
-     }
+    // const newFormData = [
+    //   {
+    //     code: targetcurrency1,
+    //     totalAmountInWallet: parseFloat(targetcurrencyInput1),
+    //     totalAmountInWalletConvertedTotarget: 0,
+    //   },
+    //   {
+    //     code: targetcurrency2,
+    //     totalAmountInWallet: parseFloat(targetcurrencyInput2),
+    //     totalAmountInWalletConvertedTotarget: 0,
+    //   },
+    //   {
+    //     code: targetcurrency3,
+    //     totalAmountInWallet: parseFloat(targetcurrencyInput3),
+    //     totalAmountInWalletConvertedTotarget: 0,
+    //   },
+    // ];
+
+    //* sending currency value and amount to context
+    depositCurrency(
+      event.target.elements.target_currency1.value,
+      event.target.elements.input_target_currency1.value
+    );
+event.target.elements.input_target_currency1.value = '';
+
+    // depositCurrencies(newFormData);
+
   };
 
+  // localStorage.removeItem("currencies");
   return (
     <form className={classes.show} onSubmit={handleSubmit}>
       <div className={classes["title-adding-balance"]}>
         <h1>
           {" "}
-          Deposit in the Wallet{" "}
+          Deposit of Cash in the Wallet{" "}
           <span
             style={{
               fontSize: "18px",
               fontStyle: "italic",
-              color: "chartreuse",
+              color: "#f2f2e4",
             }}
           >
             choose the currency needed
           </span>
         </h1>
       </div>
-      <div className={classes["p-input"]}>
-        <div className={classes["div-input1"]}>
-          <select
-            name="target_currency1"
-            className={classes.SelectTargetcurrency}
-            id="select-currency"
-            value={targetCurrency1}
-            onChange={(e) => setTargetcurrency1(e.target.value)}
-          >
-            {Object.entries(props.listOfCurrency).map((currency) => (
-              <option key={currency[0]} value={currency[0]}>
-                {currency[0]}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            id="usd"
-            name="input_target_currency1"
-            onChange={(e) => setTargetcurrencyInput1(e.target.value)}
-            placeholder="USD"
-          />
-        </div>
-        <div className={classes["div-input1"]}>
+
+      <div className={classes["div-input1"]}>
+        <select
+          name="target_currency1"
+          className={classes.SelectTargetcurrency}
+          id="select-currency"
+          value={targetcurrency1}
+          onChange={(e) => setTargetcurrency1(e.target.value)}
+        >
+          {Object.entries(props.listOfCurrency).map((currency) => (
+            <option key={currency[0]} value={currency[0]}>
+              {currency[0]}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          id="usd"
+          name="input_target_currency1"
+          className={classes.inputcurrency}
+          placeholder="Enter Amount"
+        />
+      </div>
+      {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency2"
             className={classes.SelectTargetcurrency}
@@ -95,10 +115,10 @@ const ListOfCurrenciesForDeposit = (props) => {
             id="eur"
             name="input_target_currency2"
             onChange={(e) => setTargetcurrencyInput2(e.target.value)}
-            placeholder="EUR"
+            placeholder="Enter  Amount"
           />
-        </div>
-        <div className={classes["div-input1"]}>
+        </div> */}
+      {/* <div className={classes["div-input1"]}>
           <select
             name="target_currency3"
             className={classes.SelectTargetcurrency}
@@ -117,10 +137,10 @@ const ListOfCurrenciesForDeposit = (props) => {
             id="chf"
             name="input_target_currency3"
             onChange={(e) => setTargetcurrencyInput3(e.target.value)}
-            placeholder="CHF"
+            placeholder="Enter Amount"
           />
-        </div>
-      </div>
+        </div> */}
+
       <div className={classes["div-submit"]}>
         <button type="submit" className={classes["submit-btn"]}>
           Save
@@ -134,8 +154,9 @@ const ListOfCurrenciesForDeposit = (props) => {
 ListOfCurrenciesForDeposit.displayName = "ListOfCurrency";
 
 ListOfCurrenciesForDeposit.propTypes = {
-  handleChange: PropTypes.func.isRequired,
   listOfCurrency: PropTypes.object,
+  currency: PropTypes.array,
+  setTargetcurrency1: PropTypes.func,
 };
 
 export default ListOfCurrenciesForDeposit;
